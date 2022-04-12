@@ -6,4 +6,4 @@ A organização do backlog se encontra em [```Notion```](https://emersongouveia.
  - Como dono de postos de combustiveis quero divulgar minhas ofertas para um aplo publico para ter mais competitividade.
  - Como caminhoneiro quero saber em quais postos tem pontos de descanso na minha rota para poder descansar.
  - Como motorista de aplicativo quero saber quais postos na minha rota de trabalho estão com melhores preços para aumentar meu lucro nas corridas.
- - Como motorista quero ajudar os outros motorista cadastrando onde se encontram os preços mais baixos para ajudar outros usuários. 
+ - Como motorista quero ajudar os outros motoristas cadastrando onde se encontram os preços mais baixos para ajudar outros usuários. 
