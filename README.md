@@ -7,7 +7,7 @@ Repositório para projeto prático da disciplina de Praticas de Desenvolvimento 
  - Samuel Assis Vieira - 2018109736
  ### Funções
   - Desenvolvedores: Emerson e Fábio
-  - Desing: Cecilia
+  - Design: Cecilia
   - Banco de Dados: Samuel
 ## Descrição
 Preço no Posto é um aplicativo que funciona como um radar de preços de combustiveis, para que o cliente possa encontrar os melhores preços de combustiveis e cadastrar boas ofertas quando as encontrar. Tudo em um só lugar.
