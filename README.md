@@ -11,7 +11,7 @@ Repositório para projeto prático da disciplina de Praticas de Desenvolvimento 
   - Banco de Dados: Samuel
 ## Descrição
 Preço no Posto é um aplicativo que funciona como um radar de preços de combustiveis, para que o cliente possa encontrar os melhores preços de combustiveis e cadastrar boas ofertas quando as encontrar. Tudo em um só lugar.
-### MPV
+### MVP
 Para o MVP vamos desenvolver uma landing page para captar potenciais clientes e interessados. Landing Page mostrando algumas funcionalidades ideias de tela pro sistema e identidade visual para ser validada.
 ## Tecnologias
  - Kotlin
