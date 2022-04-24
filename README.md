@@ -16,4 +16,6 @@ Para o MVP vamos desenvolver uma landing page para captar potenciais clientes e 
 ## Tecnologias
  - Kotlin
  - MySQL
+## Protótipo
+https://www.figma.com/file/gTJ67Z6kA0It9GrKbPdkqQ/Pre%C3%A7o-no-Posto---PROD?node-id=0%3A1
 
