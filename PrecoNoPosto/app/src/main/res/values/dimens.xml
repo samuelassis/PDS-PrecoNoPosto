@@ -2,7 +2,11 @@
 <resources>
     <dimen name="space_8dp">8dp</dimen>
     <dimen name="space_16dp">16dp</dimen>
+    <dimen name="space_24dp">24dp</dimen>
 
     <dimen name="margin_horizontal">@dimen/space_8dp</dimen>
     <dimen name="margin_vertical">@dimen/space_16dp</dimen>
+    <dimen name="margin_bottom">@dimen/space_24dp</dimen>
+
+    <dimen name="bottom_button_text_size">20sp</dimen>
 </resources>

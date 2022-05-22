@@ -13,5 +13,6 @@
     <color name="medium_orange">#FF9800</color>
     <color name="light_orange">#FFCC80</color>
     <color name="ultra_light_orange">#FFF3E0</color>
+    <color name="light_grey_background">#FAFAFA</color>
 
 </resources>

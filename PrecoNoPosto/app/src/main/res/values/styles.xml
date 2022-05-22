@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DarkOrangeButton" parent="TextAppearance.MaterialComponents.Button" >
+        <item name="android:textSize">@dimen/bottom_button_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="DarkOrangeButtonText" parent="TextAppearance.MaterialComponents.Button" >
+        <item name="android:textSize">@dimen/bottom_button_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+</resources>
