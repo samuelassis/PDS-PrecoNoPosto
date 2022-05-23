@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">PrecoNoPosto</string>
     <string name="concluir">Concluir</string>
+    <string name="escolher_avatar">Escolher avatar</string>
+    <string name="nome">Nome</string>
 </resources>
