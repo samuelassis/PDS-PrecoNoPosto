@@ -11,7 +11,7 @@ interface UserDao: UserRepository {
     @Delete
     override suspend fun delete(user: User)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE) //Substitui o objeto caso haja confluto
     override suspend fun save(user: User)
 
     @Update

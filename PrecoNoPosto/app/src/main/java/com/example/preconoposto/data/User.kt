@@ -1,7 +1,17 @@
 package com.example.preconoposto.data
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "User")
 data class User(
-    var name: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0L,
+    @ColumnInfo(name = "user")
+    var email: String,
     var password: String,
-    var city: String?
+    var name: String,
+    var surname: String,
+    var birthDate: String
 )
