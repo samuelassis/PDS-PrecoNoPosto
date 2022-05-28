@@ -3,4 +3,11 @@
     <string name="concluir">Concluir</string>
     <string name="escolher_avatar">Escolher avatar</string>
     <string name="nome">Nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="data_de_nascimento">Data de nascimento</string>
+    <string name="contato">Contato</string>
+    <string name="mais_email">+ Email</string>
+    <string name="mais_senha">+ Senha</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
 </resources>
