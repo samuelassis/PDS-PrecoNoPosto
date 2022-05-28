@@ -10,4 +10,12 @@
     <string name="mais_senha">+ Senha</string>
     <string name="email">Email</string>
     <string name="senha">Senha</string>
+    <string name="login_topBar">Entrar</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Senha</string>
+    <string name="remember_me">Lembrar de mim</string>
+    <string name="forgot_password">Esqueceu a senha?</string>
+    <string name="or_connect_with">Ou conecte-se usando</string>
+    <string name="doesnt_have_an_account">Não possui uma conta?</string>
+    <string name="sign_in">Cadastre-se</string>
 </resources>
