@@ -26,7 +26,6 @@ class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
 
-    // GAMBIARRA
     private val db = AppDatabase.getInstance(this.requireContext())
     private val loginUserImpl = LoginUserImpl(db.userDao)
 
@@ -40,6 +39,7 @@ class LoginFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        loginViewModel.loginUser = loginUserImpl
 
         setupObservers()
         setupListeners()
@@ -57,13 +57,14 @@ class LoginFragment : Fragment() {
     private fun setupListeners(){
         loginEnterButton.setOnClickListener {
             val user = User(
-                id=0L,
+                idUser=0L,
                 name = "",
+                surname = "",
                 email=loginEmailTiet.text.toString(),
                 password=loginPasswordTiet.text.toString(),
                 city = ""
             )
-            loginViewModel.login(user, loginUserImpl)
+            loginViewModel.login(user)
         }
     }
 
