@@ -8,10 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="light_grey">#717171</color>
-    <color name="dark_orange">#F57C00</color>
-    <color name="medium_orange">#FF9800</color>
-    <color name="light_orange">#FFCC80</color>
-    <color name="ultra_light_orange">#FFF3E0</color>
+    <color name="grey_light">#717171</color>
+    <color name="orange">#FF9800</color>
+    <color name="orange_dark">#F57C00</color>
+    <color name="orange_light">#FFCC80</color>
+    <color name="orange_ultra_light_">#FFF3E0</color>
+    <color name="light_grey_background">#FAFAFA</color>
 
 </resources>

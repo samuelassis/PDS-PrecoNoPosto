@@ -2,6 +2,7 @@ package com.example.preconoposto
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.preconoposto.ui.LoginFragment
 import com.example.preconoposto.ui.main.MainFragment
 
 // Adaptador de entrada
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, LoginFragment.newInstance())
                 .commitNow()
         }
     }
