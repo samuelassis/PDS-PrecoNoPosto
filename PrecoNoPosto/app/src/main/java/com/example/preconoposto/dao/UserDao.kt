@@ -16,4 +16,7 @@ interface UserDao: UserRepository {
 
     @Update
     override suspend fun update(user: User)
+
+    @Query("SELECT * FROM USER_TABLE WHERE email = :email AND password = :password")
+    override suspend fun getUser(email: String, password: String): User?
 }
