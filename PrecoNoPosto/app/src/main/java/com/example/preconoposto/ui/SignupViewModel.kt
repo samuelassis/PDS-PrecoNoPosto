@@ -2,7 +2,7 @@ package com.example.preconoposto.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.preconoposto.data.User
+import com.example.preconoposto.data.UserEntity
 import com.example.preconoposto.domain.SignupUserImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,11 +20,10 @@ class SignupViewModel: ViewModel() {
         surname: String,
         birthDate: String
     ) {
-        val user = User(
+        val user = UserEntity(
             email = email,
             password = password,
-            name = name,
-            surname = surname,
+            name = name + surname,
             birthDate = birthDate
         )
         CoroutineScope(Dispatchers.IO).launch{

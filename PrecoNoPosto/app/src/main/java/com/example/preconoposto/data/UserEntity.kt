@@ -3,17 +3,14 @@ package com.example.preconoposto.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(tableName = "user_table")
-data class User(
+data class UserEntity(
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
-    @ColumnInfo(name = "name")
-    var name: String,
-    @ColumnInfo(name = "email")
+    var id: Long = 0L,
     var email: String,
-    @ColumnInfo(name = "password")
     var password: String,
-    @ColumnInfo(name = "city")
-    var city: String?
+    var name: String,
+    var birthDate: String
 )

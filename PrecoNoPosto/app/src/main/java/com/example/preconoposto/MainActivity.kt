@@ -2,9 +2,8 @@ package com.example.preconoposto
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.preconoposto.ui.SignupFragment
 import com.example.preconoposto.ui.LoginFragment
-import com.example.preconoposto.ui.main.MainFragment
+import com.example.preconoposto.ui.SignupFragment
 
 // Adaptador de entrada
 
