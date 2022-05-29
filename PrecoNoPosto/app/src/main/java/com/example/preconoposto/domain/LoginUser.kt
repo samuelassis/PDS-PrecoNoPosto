@@ -1,7 +1,7 @@
 package com.example.preconoposto.domain
 
-import com.example.preconoposto.data.User
+import com.example.preconoposto.data.UserEntity
 
 interface LoginUser {
-    suspend fun login(user: User): User?
+    suspend fun login(user: UserEntity): UserEntity?
 }

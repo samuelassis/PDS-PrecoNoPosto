@@ -16,7 +16,7 @@
             android:id="@+id/signupAvatarImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -106,6 +106,7 @@
             android:layout_marginHorizontal="@dimen/margin_horizontal"
             android:layout_marginTop="@dimen/space_40dp"
             android:text="@string/contato"
+            android:textColor="@color/black"
             android:textSize="@dimen/signup_contact_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signupBirthDateLayout" />
@@ -162,10 +163,12 @@
             android:layout_marginHorizontal="@dimen/margin_horizontal"
             android:layout_marginTop="@dimen/margin_vertical"
             android:hint="@string/senha"
-            app:passwordToggleEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/signupConfirmButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signupEmailLayout">
+            app:layout_constraintTop_toBottomOf="@+id/signupEmailLayout"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signupPasswordEditText"
@@ -183,7 +186,8 @@
             android:layout_marginHorizontal="@dimen/margin_horizontal"
             android:layout_marginVertical="@dimen/margin_bottom"
             android:text="@string/concluir"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signupPasswordLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

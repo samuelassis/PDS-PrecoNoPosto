@@ -65,7 +65,7 @@ tools:context=".ui.LoginFragment">
                 android:id="@+id/loginPasswordTiet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapSentences" />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
