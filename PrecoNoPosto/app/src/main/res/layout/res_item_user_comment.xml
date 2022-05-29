@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/space_8dp">
+
+            <TextView
+                android:id="@+id/resItemUserCommentDateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/resItemUserCommentUserNameTv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/resItemUserCommentAvatarSip"
+                app:layout_constraintEnd_toEndOf="@id/resItemUserCommentUserNameTv"
+                android:textSize="12sp"
+                tools:text="00/00/0000"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/resItemUserCommentAvatarSip"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@id/resItemUserCommentUserNameTv"
+                app:layout_constraintEnd_toEndOf="@id/resItemUserCommentUserNameTv"
+                app:layout_constraintStart_toStartOf="@id/resItemUserCommentUserNameTv"
+                app:layout_constraintTop_toBottomOf="@id/resItemUserCommentDateTv"
+                app:shapeAppearanceOverlay="@style/Circular"
+                app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+            <TextView
+                android:id="@+id/resItemUserCommentUserNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/resItemUserCommentAvatarSip"
+                app:layout_constraintBottom_toTopOf="@id/resItemUserCommentAttendanceScoreTextTv"
+                app:layout_constraintEnd_toStartOf="@id/resItemUserCommentUserCommentaryTv"
+                android:textSize="12sp"
+                tools:text="João Maria da Silva"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentUserCommentaryTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_8dp"
+                android:singleLine="false"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentUserNameTv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="11sp"
+                tools:text="Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque."/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentAttendanceScoreTextTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/resItemUserCommentUserCommentaryTv"
+                android:text="@string/attendanceScore"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentAttendanceScoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:textSize="11sp"
+                android:textColor="@color/orange_dark"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentAttendanceScoreTextTv"
+                app:layout_constraintTop_toTopOf="@id/resItemUserCommentAttendanceScoreTextTv"
+                tools:text="5.0/5.0"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentQualityScoreTextTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_8dp"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentAttendanceScoreTv"
+                app:layout_constraintTop_toTopOf="@id/resItemUserCommentAttendanceScoreTv"
+                android:text="@string/qualityScore"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentQualityScoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:textSize="11sp"
+                android:textColor="@color/orange_dark"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentQualityScoreTextTv"
+                app:layout_constraintTop_toTopOf="@id/resItemUserCommentQualityScoreTextTv"
+                tools:text="5.0/5.0"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentWaitingTimeScoreTextTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/resItemUserCommentAttendanceScoreTextTv"
+                android:text="@string/waitingTimeScore"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentWaitingTimeScoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:textSize="11sp"
+                android:textColor="@color/orange_dark"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentWaitingTimeScoreTextTv"
+                app:layout_constraintTop_toTopOf="@id/resItemUserCommentWaitingTimeScoreTextTv"
+                tools:text="5.0/5.0"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentServiceScoreTextTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_8dp"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentWaitingTimeScoreTv"
+                app:layout_constraintTop_toTopOf="@id/resItemUserCommentWaitingTimeScoreTv"
+                android:text="@string/serviceScore"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentServiceScoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:textSize="11sp"
+                android:textColor="@color/orange_dark"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentServiceScoreTextTv"
+                app:layout_constraintTop_toTopOf="@id/resItemUserCommentServiceScoreTextTv"
+                tools:text="5.0/5.0"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentSafetyScoreTextTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/space_8dp"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentServiceScoreTv"
+                app:layout_constraintTop_toTopOf="@id/resItemUserCommentServiceScoreTv"
+                android:text="@string/safetyScore"/>
+
+            <TextView
+                android:id="@+id/resItemUserCommentSafetyScoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:textSize="11sp"
+                android:textColor="@color/orange_dark"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/resItemUserCommentSafetyScoreTextTv"
+                app:layout_constraintTop_toTopOf="@id/resItemUserCommentSafetyScoreTextTv"
+                tools:text="5.0/5.0"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
