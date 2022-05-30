@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_gas_station_details_container"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.GasStationDetailsFragment">
 
@@ -166,11 +167,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/gasStationDetailsGeneralScoreStarIv"/>
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/gasStationDetailsGeneralScoreStarIv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/gasStationDetailsGeneralScoreTv"
@@ -185,7 +185,7 @@
         android:layout_marginTop="@dimen/space_16dp"
         app:layout_constraintEnd_toStartOf="@id/gasStationDetailsAlcoholCard"
         app:layout_constraintTop_toBottomOf="@id/gasStationDetailsAvatarSiv"
-        app:layout_constraintStart_toStartOf="@id/gasStationDetailsAvatarSiv">
+        app:layout_constraintStart_toStartOf="@id/gasStationDetailsEvaluateMb">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -319,7 +319,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/gasStationDetailsAlcoholCard"
         app:layout_constraintTop_toTopOf="@id/gasStationDetailsGasolineCard"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="@id/gasStationDetailsEvaluateMb">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -388,7 +388,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/gasStationDetailsEvaluateMb"
         app:layout_constraintTop_toBottomOf="@+id/gasStationDetailsAlcoholUpdateMb"
-        tools:listitem="@layout/res_item_user_comment"/>
+        tools:listitem="@layout/res_user_comment"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/gasStationDetailsEvaluateMb"
