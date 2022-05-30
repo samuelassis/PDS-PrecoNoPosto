@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.preconoposto.dao.UserDao
-import com.example.preconoposto.data.UserEntity
+import com.example.preconoposto.data.User
 
 @Database(
-    entities = [UserEntity::class],
+    entities = [User::class],
     version = 1
 )
 abstract class AppDatabase: RoomDatabase() {

@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.preconoposto.data.UserEntity
+import android.widget.TextView
+import androidx.navigation.fragment.findNavController
+import com.example.preconoposto.data.User
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
 import com.example.preconoposto.domain.LoginUserImpl
@@ -23,6 +25,7 @@ class LoginFragment : Fragment() {
     private lateinit var loginEnterButton: MaterialButton
     private lateinit var loginEmailTiet: TextInputEditText
     private lateinit var loginPasswordTiet: TextInputEditText
+    private lateinit var loginSignInMb: TextView
 
     private lateinit var loginViewModel: LoginViewModel
 
@@ -51,6 +54,7 @@ class LoginFragment : Fragment() {
         loginEnterButton = view.findViewById(R.id.loginEnterButton)
         loginEmailTiet = view.findViewById(R.id.loginEmailTiet)
         loginPasswordTiet = view.findViewById(R.id.loginPasswordTiet)
+        loginSignInMb = view.findViewById(R.id.loginSignInMb)
     }
 
     private fun setupObservers() {
@@ -64,13 +68,16 @@ class LoginFragment : Fragment() {
 
     private fun setupListeners() {
         loginEnterButton.setOnClickListener {
-            val user = UserEntity(
+            val user = User(
                 name = "",
                 email = loginEmailTiet.text.toString(),
                 password = loginPasswordTiet.text.toString(),
                 birthDate = ""
             )
             loginViewModel.login(user, loginUserImpl)
+        }
+        loginSignInMb.setOnClickListener {
+            findNavController().navigate(R.id.fromLoginFragmentToSignupFragment)
         }
     }
 }

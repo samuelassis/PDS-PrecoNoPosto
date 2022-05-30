@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = "user_table")
-data class UserEntity(
+data class User(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L,
     var email: String,
