@@ -9,8 +9,7 @@ data class User(
     @PrimaryKey(autoGenerate = true)
     var idUser: Long = 0L,
     var name: String,
-    var surname: String,
     var email: String,
     var password: String,
-    var city: String?
+    var birthday: String
 )
