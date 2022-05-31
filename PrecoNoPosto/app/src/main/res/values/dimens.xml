@@ -3,8 +3,13 @@
     <dimen name="space_8dp">8dp</dimen>
     <dimen name="space_16dp">16dp</dimen>
     <dimen name="space_24dp">24dp</dimen>
+    <dimen name="space_40dp">40dp</dimen>
     <dimen name="space_48dp">48dp</dimen>
 
     <dimen name="margin_horizontal">@dimen/space_8dp</dimen>
     <dimen name="margin_vertical">@dimen/space_16dp</dimen>
+    <dimen name="margin_bottom">@dimen/space_24dp</dimen>
+
+    <dimen name="bottom_button_text_size">20sp</dimen>
+    <dimen name="signup_contact_text_size">18sp</dimen>
 </resources>

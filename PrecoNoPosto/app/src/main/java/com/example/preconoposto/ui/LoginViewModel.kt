@@ -12,9 +12,9 @@ class LoginViewModel() : ViewModel() {
 
     val isLoginCorrect: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    lateinit var loginUser: LoginUserImpl
+//    lateinit var loginUser: LoginUserImpl
 
-    fun login(user: User) {
+    fun login(user: User, loginUser: LoginUserImpl) {
         CoroutineScope(Dispatchers.IO).launch {
             if(loginUser.login(user) == null) isLoginCorrect.postValue(true)
             else isLoginCorrect.postValue(false)
