@@ -59,10 +59,9 @@ class LoginFragment : Fragment() {
             val user = User(
                 idUser=0L,
                 name = "",
-                surname = "",
                 email=loginEmailTiet.text.toString(),
                 password=loginPasswordTiet.text.toString(),
-                city = ""
+                birthday = "31/12/1999"
             )
             loginViewModel.login(user)
         }

@@ -10,8 +10,7 @@ data class Price(
     val idPrice: Long = 0L,
     val idGasStation: Long,
     val gasolinePrice: Double,
-    val ethanolPrice: Double,
-    val GNVPrice: Double,
+    val alcoholPrice: Double,
     val dieselPrice: Double,
     val lastUpdateDate: Date
 )

@@ -2,6 +2,7 @@ package com.example.preconoposto.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.sql.Date
 
 @Entity
 data class Rating(
@@ -15,5 +16,6 @@ data class Rating(
     val waitingTimeScore: Double,
     val serviceScore: Double,
     val safetyScore: Double,
-    val commentary: String
+    val commentary: String,
+    val date: Date
 )
