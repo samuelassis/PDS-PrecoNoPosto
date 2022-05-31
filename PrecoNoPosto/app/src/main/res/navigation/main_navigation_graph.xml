@@ -8,17 +8,28 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.preconoposto.ui.LoginFragment"
-        android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/fromLoginFragmentToSignupFragment"
             app:destination="@id/signupFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/fromLoginFragmentToHomeFragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@+id/homeFragment"
+            app:enterAnim="@android:anim/fade_in" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.preconoposto.ui.SignupFragment"
-        android:label="fragment_signup"
+        android:label="Cadastrar"
         tools:layout="@layout/fragment_signup" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.preconoposto.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>

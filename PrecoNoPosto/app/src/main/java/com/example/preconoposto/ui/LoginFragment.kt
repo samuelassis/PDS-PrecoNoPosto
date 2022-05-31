@@ -12,11 +12,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.preconoposto.data.User
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
+import com.example.preconoposto.databinding.FragmentLoginBinding
 import com.example.preconoposto.domain.LoginUserImpl
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 
 class LoginFragment : Fragment() {
+
+    lateinit var binding: FragmentLoginBinding
 
     companion object {
         fun newInstance() = LoginFragment()
@@ -40,7 +43,8 @@ class LoginFragment : Fragment() {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         db = AppDatabase.getInstance(this.requireContext())
         loginUserImpl = LoginUserImpl(db.userDao)
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentLoginBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,6 +79,7 @@ class LoginFragment : Fragment() {
                 birthDate = ""
             )
             loginViewModel.login(user, loginUserImpl)
+            findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
         }
         loginSignInMb.setOnClickListener {
             findNavController().navigate(R.id.fromLoginFragmentToSignupFragment)
