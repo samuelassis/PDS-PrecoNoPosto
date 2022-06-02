@@ -202,13 +202,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/gasStationDetailsGasolinePriceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="0,000/L"
                 android:textColor="@color/orange_dark"
                 android:textSize="24sp"
+                android:inputType="numberDecimal"
+                android:background="@null"
                 app:layout_constraintTop_toBottomOf="@id/gasStationDetailsGasolineTv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -269,13 +271,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/gasStationDetailsAlcoholPriceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="0,000/L"
                 android:textColor="@color/orange_dark"
                 android:textSize="24sp"
+                android:inputType="numberDecimal"
+                android:background="@null"
                 app:layout_constraintTop_toBottomOf="@id/gasStationDetailsAlcoholTv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -336,13 +340,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/gasStationDetailsDieselPriceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="0,000/L"
                 android:textColor="@color/orange_dark"
                 android:textSize="24sp"
+                android:inputType="numberDecimal"
+                android:background="@null"
                 app:layout_constraintTop_toBottomOf="@id/gasStationDetailsDieselTv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>

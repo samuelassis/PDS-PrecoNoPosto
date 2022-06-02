@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.preconoposto.R
+import com.example.preconoposto.database.AppDatabase
 import com.example.preconoposto.data.GasStation
 import com.example.preconoposto.data.Price
 import com.example.preconoposto.data.Rating
@@ -17,7 +18,10 @@ import com.example.preconoposto.data.User
 import com.example.preconoposto.data.relations.GasStationAndPrice
 import com.example.preconoposto.data.relations.GasStationWithRatingsAndUser
 import com.example.preconoposto.data.relations.RatingAndUser
-import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.sql.Date
 
 class GasStationDetailsFragment : Fragment() {
@@ -25,6 +29,8 @@ class GasStationDetailsFragment : Fragment() {
     companion object {
         fun newInstance() = GasStationDetailsFragment()
     }
+
+    val gasStationId : Long = 1
 
     private lateinit var gasStationName: TextView
     private lateinit var attendanceScore: TextView
@@ -39,10 +45,18 @@ class GasStationDetailsFragment : Fragment() {
     private lateinit var dieselPrice: TextView
     private lateinit var dieselPriceUpdateDate: TextView
     private lateinit var generalScore: TextView
+
+    private lateinit var gasStationDetailsGasolineUpdateMb: MaterialButton
+    private lateinit var gasStationDetailsAlcoholUpdateMb: MaterialButton
+    private lateinit var gasStationDetailsDieselUpdateMb: MaterialButton
+
     private lateinit var userCommentsRecycleView: RecyclerView
     private lateinit var gasStationDetailsAdapter: GasStationDetailsAdapter
 
     private lateinit var viewModel: GasStationDetailsViewModel
+    private val gasStationDao by lazy {
+        AppDatabase.getInstance(this.requireContext()).gasStationDao
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,84 +69,7 @@ class GasStationDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[GasStationDetailsViewModel::class.java]
 
-        val gasStation = GasStation(
-            idGasStation = 0,
-            idAddress = 0,
-            idService = 0,
-            idRating = 0,
-            idPrice = 0,
-            name = "Posto Ipiranga Anel 2003"
-        )
-        val price = Price(
-            idPrice = 0,
-            idGasStation = 0,
-            gasolinePrice = 5.165,
-            alcoholPrice = 4.354,
-            dieselPrice = 4.665,
-            lastUpdateDate = Date(20190731)
-        )
-        val rating = Rating(
-            idRating = 0,
-            idGasStation = 0,
-            idUser = 0,
-            generalScore = 4.7,
-            attendanceScore = 4.3,
-            qualityScore = 4.1,
-            waitingTimeScore = 4.9,
-            serviceScore = 3.8,
-            safetyScore = 5.0,
-            commentary = "Este é um exemplo de comentário feito por um usuário qualquer",
-            date = Date(20190731)
-        )
-        val rating2 = Rating(
-            idRating = 1,
-            idGasStation = 0,
-            idUser = 1,
-            generalScore = 4.5,
-            attendanceScore = 4.5,
-            qualityScore = 4.3,
-            waitingTimeScore = 4.7,
-            serviceScore = 4.0,
-            safetyScore = 4.8,
-            commentary = "Exemplo de comentário muito grande: lalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalala",
-            date = Date(20190731)
-        )
-        val user = User(
-            idUser = 0,
-            name = "Fábio Brum",
-            email = "email@gmail.com",
-            password = "123456",
-            birthday = "31/12/1999"
-        )
-        val user2 = User(
-            idUser = 1,
-            name = "Emerson Gouveia",
-            email = "email@gmail.com",
-            password = "123456",
-            birthday = "31/12/1999"
-        )
-        val listOfRatingsAndUser = listOf(
-            RatingAndUser(
-                rating = rating,
-                user = user
-            ),
-            RatingAndUser(
-                rating = rating2,
-                user = user2
-            )
-        )
-
-        viewModel.setGasStationWithRatingsAndUser(GasStationWithRatingsAndUser(
-            gasStation = gasStation,
-            ratings = listOfRatingsAndUser
-        ))
-
-        viewModel.setGasStationAndPrice(GasStationAndPrice(
-            gasStation = gasStation,
-            price = price
-        ))
-
-        val gasStationWithRatingsAndUser = viewModel._gasStationWithRatingsAndUser
+        val gasStationWithRatingsAndUser = viewModel.gasStationWithRatingsAndUser
 
         gasStationName = view.findViewById(R.id.gasStationDetailsGasStationNameTv)
         attendanceScore = view.findViewById(R.id.gasStationDetailsAttendanceScoreTv)
@@ -149,6 +86,28 @@ class GasStationDetailsFragment : Fragment() {
         generalScore = view.findViewById(R.id.gasStationDetailsGeneralScoreTv)
         userCommentsRecycleView = view.findViewById(R.id.gasStationDetailsCommentsRv)
 
+        gasStationDetailsGasolineUpdateMb = view.findViewById(R.id.gasStationDetailsGasolineUpdateMb)
+        gasStationDetailsAlcoholUpdateMb = view.findViewById(R.id.gasStationDetailsAlcoholUpdateMb)
+        gasStationDetailsDieselUpdateMb = view.findViewById(R.id.gasStationDetailsDieselUpdateMb)
+
+        CoroutineScope(Dispatchers.Default).launch {
+            val gasStationAndAddressAndPriceAndService =
+                gasStationDao.getGasStationWithRatingsAndUser(gasStationId)
+            val gasStationAndPrice =
+                gasStationDao.getGasStationAndPrice(gasStationId)
+
+            viewModel.setGasStationWithRatingsAndUser(GasStationWithRatingsAndUser(
+                gasStation = gasStationAndAddressAndPriceAndService.gasStation,
+                ratings = gasStationAndAddressAndPriceAndService.ratings
+            ))
+
+            viewModel.setGasStationAndPrice(GasStationAndPrice(
+                gasStation = gasStationAndPrice.gasStation,
+                price = gasStationAndPrice.price
+            ))
+        }
+
+        setupListeners()
 
         viewModel.getGasStationAndPrice().observe(viewLifecycleOwner) {
             val date =
@@ -177,4 +136,18 @@ class GasStationDetailsFragment : Fragment() {
             userCommentsRecycleView.adapter = gasStationDetailsAdapter
         }
     }
+
+    private fun setupListeners() {
+        gasStationDetailsGasolineUpdateMb.setOnClickListener {
+
+        }
+        gasStationDetailsGasolineUpdateMb.setOnClickListener {
+
+        }
+        gasStationDetailsGasolineUpdateMb.setOnClickListener {
+
+        }
+    }
+
+
 }
