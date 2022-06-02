@@ -3,12 +3,14 @@ package com.example.preconoposto.domain
 import com.example.preconoposto.data.User
 import com.example.preconoposto.repository.UserRepository
 
-// Classe de domínio
-
-class LoginUserImpl(
+class UserAccessImpl(
     var repository: UserRepository
-): LoginUser {
+): UserAccess {
     override suspend fun login(user: User): User? {
         return repository.getUser(user.email, user.password)
+    }
+
+    override suspend fun signup(user: User) : Long {
+        return repository.save(user)
     }
 }

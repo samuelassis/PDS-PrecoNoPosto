@@ -12,7 +12,7 @@ interface UserDao: UserRepository {
     override suspend fun delete(user: User)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    override suspend fun save(user: User)
+    override suspend fun save(user: User) : Long
 
     @Update
     override suspend fun update(user: User)

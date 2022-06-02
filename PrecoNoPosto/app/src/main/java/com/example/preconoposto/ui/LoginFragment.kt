@@ -2,18 +2,18 @@ package com.example.preconoposto.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.preconoposto.data.User
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
 import com.example.preconoposto.databinding.FragmentLoginBinding
-import com.example.preconoposto.domain.LoginUserImpl
+import com.example.preconoposto.domain.UserAccessImpl
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 
@@ -32,17 +32,17 @@ class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
 
-    // GAMBIARRA
-    private lateinit var db: AppDatabase
-    private lateinit var loginUserImpl: LoginUserImpl
+    private val userDao by lazy {
+        AppDatabase.getInstance(this.requireContext()).userDao
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        db = AppDatabase.getInstance(this.requireContext())
-        loginUserImpl = LoginUserImpl(db.userDao)
+        loginViewModel.userAccessImpl = UserAccessImpl(userDao)
+
         binding = FragmentLoginBinding.inflate(inflater)
         return binding.root
     }
@@ -64,9 +64,13 @@ class LoginFragment : Fragment() {
     private fun setupObservers() {
         loginViewModel.isLoginCorrect.observe(viewLifecycleOwner) { isLoginCorrect ->
             if (isLoginCorrect)
-                Log.i("login", "login feito com sucesso")
+                findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
             else
-                Log.i("login", "login não foi efetuado")
+                Toast.makeText(
+                    this.requireContext(),
+                    "Usuário ou senha incorretos",
+                    Toast.LENGTH_SHORT
+                ).show()
         }
     }
 
@@ -78,8 +82,7 @@ class LoginFragment : Fragment() {
                 password = loginPasswordTiet.text.toString(),
                 birthDate = ""
             )
-            loginViewModel.login(user, loginUserImpl)
-            findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
+            loginViewModel.login(user)
         }
         loginSignInMb.setOnClickListener {
             findNavController().navigate(R.id.fromLoginFragmentToSignupFragment)
