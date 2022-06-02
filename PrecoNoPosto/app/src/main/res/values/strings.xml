@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">PrecoNoPosto</string>
+    <string name="concluir">Concluir</string>
+    <string name="escolher_avatar">Escolher avatar</string>
+    <string name="nome">Nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="data_de_nascimento">Data de nascimento</string>
+    <string name="contato">Contato</string>
+    <string name="mais_email">+ Email</string>
+    <string name="mais_senha">+ Senha</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
     <string name="login_topBar">Entrar</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Senha</string>
@@ -23,4 +33,7 @@
     <string name="qualityScoreCommentary">Combustível:</string>
     <string name="waitingTimeScoreCommentary">Espera:</string>
     <string name="serviceScoreCommentary">Serviço:</string>
+    <string name="inicio">Inicio</string>
+    <string name="gas_stations">Postos</string>
+    <string name="profile">Perfil</string>
 </resources>
