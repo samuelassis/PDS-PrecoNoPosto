@@ -1,20 +1,22 @@
 package com.example.preconoposto.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
-import com.example.preconoposto.domain.LoginUserImpl
 import com.example.preconoposto.domain.SignupUserImpl
-import com.example.preconoposto.repository.UserRepository
+import com.example.preconoposto.domain.UserAccessImpl
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignupFragment : Fragment() {
 
@@ -31,16 +33,17 @@ class SignupFragment : Fragment() {
 
 
     private lateinit var viewModel: SignupViewModel
-    private lateinit var db: AppDatabase
-    private lateinit var signupUserImpl: SignupUserImpl
+
+    private val userDao by lazy {
+        AppDatabase.getInstance(this.requireContext()).userDao
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(SignupViewModel::class.java)
-        db = AppDatabase.getInstance(this.requireContext())
-        signupUserImpl = SignupUserImpl(db.userDao)
+        viewModel = ViewModelProvider(this)[SignupViewModel::class.java]
+        viewModel.userAccessImpl = UserAccessImpl(userDao)
         return inflater.inflate(R.layout.fragment_signup, container, false)
     }
 
@@ -64,7 +67,11 @@ class SignupFragment : Fragment() {
             if (it == true)
                 Log.i("login", "signup feito com sucesso")
             else
-                Log.i("login", "signup não foi efetuado")
+                Toast.makeText(
+                    this.requireContext(),
+                    "Erro: Todos os campos são obrigatórios",
+                    Toast.LENGTH_SHORT
+                ).show()
         }
 
         signupConfirmButton.setOnClickListener {
@@ -73,14 +80,18 @@ class SignupFragment : Fragment() {
     }
 
     private fun signupUser() {
-        viewModel.signupUser(
-            signupUserImpl,
-            signupNameEditText.text.toString(),
-            signupSurnameEditText.text.toString(),
-            signupBirthDateEditText.text.toString(),
-            signupEmailEditText.text.toString(),
-            signupPasswordEditText.text.toString()
-        )
+        val context = this.requireContext()
+        CoroutineScope(Dispatchers.IO).launch {
+            AppDatabase.getInstance(context).clearAllTables()
+            viewModel.signupUser(
+                signupNameEditText.text.toString(),
+                signupSurnameEditText.text.toString(),
+                signupBirthDateEditText.text.toString(),
+                signupEmailEditText.text.toString(),
+                signupPasswordEditText.text.toString()
+            )
+        }
+
     }
 
 }
