@@ -14,5 +14,8 @@
     <color name="orange_light">#FFCC80</color>
     <color name="orange_ultra_light_">#FFF3E0</color>
     <color name="light_grey_background">#FAFAFA</color>
+    <color name="light_grey_text_background">#F5F5F5</color>
+
+    <color name="icon_grey_color">#5F5F5F</color>
 
 </resources>

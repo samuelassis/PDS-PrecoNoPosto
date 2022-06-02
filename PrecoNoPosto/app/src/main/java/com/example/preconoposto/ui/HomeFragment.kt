@@ -11,6 +11,7 @@ import com.example.preconoposto.R
 import com.example.preconoposto.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
