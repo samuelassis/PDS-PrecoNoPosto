@@ -7,10 +7,10 @@ import com.example.preconoposto.data.Price
 
 data class GasStationAndPrice(
     @Embedded
-    val price: Price,
+    val price: Price?,
     @Relation(
-        parentColumn = "idPrice",
-        entityColumn = "idPrice"
+        parentColumn = "idGasStation",
+        entityColumn = "idGasStation"
     )
     val gasStation: GasStation
 )

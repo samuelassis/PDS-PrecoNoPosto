@@ -16,22 +16,15 @@ data class GasStationWithRatingsAndUser(
         parentColumn = "idGasStation",
         entityColumn = "idGasStation"
     )
-    val ratings: List<RatingAndUser>
-)
-
-@Entity(primaryKeys = ["idRating", "idUser"])
-data class RatingUserCrossRef(
-    val idRating: Long,
-    val idUser: Long
+    val ratings: List<RatingAndUser>?
 )
 
 data class RatingAndUser(
     @Embedded
     val rating: Rating,
     @Relation(
-        parentColumn = "idRating",
+        parentColumn = "idUser",
         entityColumn = "idUser",
-        associateBy = Junction(RatingUserCrossRef::class)
     )
     val user: User
 )

@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.preconoposto.dao.GasStationDao
+import com.example.preconoposto.dao.PriceDao
+import com.example.preconoposto.dao.RatingDao
 import com.example.preconoposto.dao.UserDao
 import com.example.preconoposto.data.*
-import com.example.preconoposto.data.relations.RatingUserCrossRef
 
 @Database(
     entities = [
@@ -19,16 +20,16 @@ import com.example.preconoposto.data.relations.RatingUserCrossRef
         Rating::class,
         Service::class,
         Session::class,
-        User::class,
-        RatingUserCrossRef::class,
-
+        User::class
     ],
-    version = 2
+    version = 6
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract val userDao: UserDao
     abstract val gasStationDao: GasStationDao
+    abstract val priceDao: PriceDao
+    abstract val ratingDao: RatingDao
 
     companion object{
         @Volatile
