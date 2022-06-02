@@ -11,18 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
-import com.example.preconoposto.data.GasStation
-import com.example.preconoposto.data.Price
-import com.example.preconoposto.data.Rating
-import com.example.preconoposto.data.User
-import com.example.preconoposto.data.relations.GasStationAndPrice
-import com.example.preconoposto.data.relations.GasStationWithRatingsAndUser
-import com.example.preconoposto.data.relations.RatingAndUser
+import com.example.preconoposto.domain.GasStationDetailsImpl
 import com.google.android.material.button.MaterialButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.sql.Date
 
 class GasStationDetailsFragment : Fragment() {
 
@@ -68,73 +58,32 @@ class GasStationDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[GasStationDetailsViewModel::class.java]
-
-        val gasStationWithRatingsAndUser = viewModel.gasStationWithRatingsAndUser
+        viewModel.gasStationDetailsImpl = GasStationDetailsImpl(gasStationDao)
 
         gasStationName = view.findViewById(R.id.gasStationDetailsGasStationNameTv)
+
+        generalScore = view.findViewById(R.id.gasStationDetailsGeneralScoreTv)
         attendanceScore = view.findViewById(R.id.gasStationDetailsAttendanceScoreTv)
         qualityScore = view.findViewById(R.id.gasStationDetailsQualityScoreTv)
         waitingTimeScore = view.findViewById(R.id.gasStationDetailsWaitingTimeScoreTv)
         serviceScore = view.findViewById(R.id.gasStationDetailsServiceScoreTv)
         safetyScore = view.findViewById(R.id.gasStationDetailsSafetyScoreTv)
+
         gasPrice = view.findViewById(R.id.gasStationDetailsGasolinePriceTv)
         gasPriceUpdateDate = view.findViewById(R.id.gasStationDetailsGasolineUpdatedDateTv)
         alcoholPrice = view.findViewById(R.id.gasStationDetailsAlcoholPriceTv)
         alcoholPriceUpdateDate = view.findViewById(R.id.gasStationDetailsAlcoholUpdatedDateTv)
         dieselPrice = view.findViewById(R.id.gasStationDetailsDieselPriceTv)
         dieselPriceUpdateDate = view.findViewById(R.id.gasStationDetailsDieselUpdatedDateTv)
-        generalScore = view.findViewById(R.id.gasStationDetailsGeneralScoreTv)
-        userCommentsRecycleView = view.findViewById(R.id.gasStationDetailsCommentsRv)
 
         gasStationDetailsGasolineUpdateMb = view.findViewById(R.id.gasStationDetailsGasolineUpdateMb)
         gasStationDetailsAlcoholUpdateMb = view.findViewById(R.id.gasStationDetailsAlcoholUpdateMb)
         gasStationDetailsDieselUpdateMb = view.findViewById(R.id.gasStationDetailsDieselUpdateMb)
 
-        CoroutineScope(Dispatchers.Default).launch {
-            val gasStationAndAddressAndPriceAndService =
-                gasStationDao.getGasStationWithRatingsAndUser(gasStationId)
-            val gasStationAndPrice =
-                gasStationDao.getGasStationAndPrice(gasStationId)
-
-            viewModel.setGasStationWithRatingsAndUser(GasStationWithRatingsAndUser(
-                gasStation = gasStationAndAddressAndPriceAndService.gasStation,
-                ratings = gasStationAndAddressAndPriceAndService.ratings
-            ))
-
-            viewModel.setGasStationAndPrice(GasStationAndPrice(
-                gasStation = gasStationAndPrice.gasStation,
-                price = gasStationAndPrice.price
-            ))
-        }
+        userCommentsRecycleView = view.findViewById(R.id.gasStationDetailsCommentsRv)
 
         setupListeners()
-
-        viewModel.getGasStationAndPrice().observe(viewLifecycleOwner) {
-            val date =
-                it?.price?.lastUpdateDate?.toString() ?: "--/--/--"
-
-            gasPrice.text = viewModel.getGasolinePriceText()
-            gasPriceUpdateDate.text = date
-            alcoholPrice.text = viewModel.getAlcoholPriceText()
-            alcoholPriceUpdateDate.text = date
-            dieselPrice.text = viewModel.getDieselPriceText()
-            dieselPriceUpdateDate.text = date
-        }
-
-        viewModel.getGasStationWithRatingsAndUser().observe(viewLifecycleOwner) {
-            gasStationName.text = gasStationWithRatingsAndUser.value?.gasStation?.name ?: "Posto Selecionado"
-            generalScore.text = viewModel.getGeneralScoreText()
-            attendanceScore.text = viewModel.getAttendanceScoreText()
-            qualityScore.text = viewModel.getQualityScoreText()
-            waitingTimeScore.text = viewModel.getWaitingTimeScoreText()
-            serviceScore.text = viewModel.getServiceScoreText()
-            safetyScore.text = viewModel.getSafetyScoreText()
-
-            gasStationDetailsAdapter = GasStationDetailsAdapter()
-            gasStationDetailsAdapter.setComments(it.ratings)
-            userCommentsRecycleView.layoutManager = LinearLayoutManager(view.context)
-            userCommentsRecycleView.adapter = gasStationDetailsAdapter
-        }
+        setupObservers(view)
     }
 
     private fun setupListeners() {
@@ -149,5 +98,36 @@ class GasStationDetailsFragment : Fragment() {
         }
     }
 
+    private fun setupObservers(view: View){
+        viewModel.getPriceTexts(gasStationId).observe(viewLifecycleOwner) { map ->
+            val date = map.getValue("date")
 
+            gasPrice.text = map.getValue("gasPrice")
+            gasPriceUpdateDate.text = date
+            alcoholPrice.text = map.getValue("alcoholPrice")
+            alcoholPriceUpdateDate.text = date
+            dieselPrice.text =map.getValue("dieselPrice")
+            dieselPriceUpdateDate.text = date
+        }
+
+        viewModel.getScoreAverageTexts(gasStationId).observe(viewLifecycleOwner) { map ->
+            generalScore.text = map.getValue("generalScore")
+            attendanceScore.text = map.getValue("attendanceScore")
+            qualityScore.text = map.getValue("qualityScore")
+            waitingTimeScore.text = map.getValue("waitingTimeScore")
+            serviceScore.text = map.getValue("serviceScore")
+            safetyScore.text = map.getValue("safetyScore")
+        }
+
+        viewModel.getGasStationWithRatingsAndUser(gasStationId).observe(viewLifecycleOwner) {
+            gasStationWithRatingsAndUser ->
+                gasStationName.text = gasStationWithRatingsAndUser.gasStation.name
+                gasStationWithRatingsAndUser.ratings?.let { ratingAndUserList ->
+                    gasStationDetailsAdapter = GasStationDetailsAdapter()
+                    gasStationDetailsAdapter.setComments(ratingAndUserList)
+                    userCommentsRecycleView.layoutManager = LinearLayoutManager(view.context)
+                    userCommentsRecycleView.adapter = gasStationDetailsAdapter
+                }
+        }
+    }
 }

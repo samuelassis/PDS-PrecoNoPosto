@@ -3,16 +3,10 @@ package com.example.preconoposto
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.example.preconoposto.databinding.MainActivityBinding
-import com.example.preconoposto.ui.LoginFragment
-import com.example.preconoposto.ui.SignupFragment
-
-// Adaptador de entrada
 
 class MainActivity : AppCompatActivity() {
 

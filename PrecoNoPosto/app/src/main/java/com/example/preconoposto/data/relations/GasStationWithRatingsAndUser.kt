@@ -16,7 +16,7 @@ data class GasStationWithRatingsAndUser(
         parentColumn = "idGasStation",
         entityColumn = "idGasStation"
     )
-    val ratings: List<RatingAndUser>
+    val ratings: List<RatingAndUser>?
 )
 
 data class RatingAndUser(

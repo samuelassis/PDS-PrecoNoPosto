@@ -2,34 +2,34 @@ package com.example.preconoposto.dao
 
 import androidx.room.*
 import com.example.preconoposto.data.GasStation
-import com.example.preconoposto.data.Service
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.data.relations.GasStationAndPrice
 import com.example.preconoposto.data.relations.GasStationWithRatings
 import com.example.preconoposto.data.relations.GasStationWithRatingsAndUser
+import com.example.preconoposto.repository.GasStationRepository
 
 @Dao
-interface GasStationDao {
+interface GasStationDao: GasStationRepository {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun setGasStation(gasStation: GasStation)
+    override suspend fun setGasStation(gasStation: GasStation)
 
     @Transaction
     @Query("SELECT * FROM GasStation WHERE idGasStation == :id")
-    suspend fun getGasStationWithRatings(id: Long): GasStationWithRatings
+    override suspend fun getGasStationWithRatings(id: Long): GasStationWithRatings
 
     @Transaction
     @Query("SELECT * FROM GasStation WHERE idGasStation == :id")
-    suspend fun getGasStationWithRatingsAndUser(id: Long): GasStationWithRatingsAndUser
+    override suspend fun getGasStationWithRatingsAndUser(id: Long): GasStationWithRatingsAndUser
 
     @Transaction
     @Query("SELECT * FROM GasStation")
-    suspend fun getAllGasStationsWithRatings(): List<GasStationWithRatings>
+    override suspend fun getAllGasStationsWithRatings(): List<GasStationWithRatings>
 
     @Transaction
     @Query("SELECT * FROM GasStation")
-    suspend fun getAllGasStationsAndAddressAndPriceAndService(): List<GasStationAndAddressAndPriceAndService>
+    override suspend fun getAllGasStationsAndAddressAndPriceAndService(): List<GasStationAndAddressAndPriceAndService>
 
     @Transaction
     @Query("SELECT * FROM GasStation INNER JOIN Price WHERE GasStation.idGasStation == Price.idGasStation AND GasStation.idGasStation == :id")
-    suspend fun getGasStationAndPrice(id: Long): GasStationAndPrice
+    override suspend fun getGasStationAndPrice(id: Long): GasStationAndPrice
 }
