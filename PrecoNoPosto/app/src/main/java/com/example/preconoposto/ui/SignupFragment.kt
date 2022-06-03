@@ -10,13 +10,9 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
-import com.example.preconoposto.domain.SignupUserImpl
 import com.example.preconoposto.domain.UserAccessImpl
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class SignupFragment : Fragment() {
 
@@ -80,18 +76,13 @@ class SignupFragment : Fragment() {
     }
 
     private fun signupUser() {
-        val context = this.requireContext()
-        CoroutineScope(Dispatchers.IO).launch {
-            AppDatabase.getInstance(context).clearAllTables()
-            viewModel.signupUser(
-                signupNameEditText.text.toString(),
-                signupSurnameEditText.text.toString(),
-                signupBirthDateEditText.text.toString(),
-                signupEmailEditText.text.toString(),
-                signupPasswordEditText.text.toString()
-            )
-        }
-
+        viewModel.signupUser(
+            signupNameEditText.text.toString(),
+            signupSurnameEditText.text.toString(),
+            signupBirthDateEditText.text.toString(),
+            signupEmailEditText.text.toString(),
+            signupPasswordEditText.text.toString()
+        )
     }
 
 }

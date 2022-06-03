@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.EvaluateGasStationFragment">
+
+    <TextView
+        android:id="@+id/evaluateGasStationScreenTitleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:text="@string/evaluateTitle"/>
+
+    <TextView
+        android:id="@+id/evaluateGasStationGeneralScoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_16dp"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/evaluateGasStationScreenTitleTv"
+        android:text="@string/generalScore"/>
+
+    <EditText
+        android:id="@+id/evaluateGasStationGeneralScoreEt"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintEnd_toStartOf="@id/evaluateGasStationGeneralMaxScoreTextTv"
+        app:layout_constraintBottom_toBottomOf="@id/evaluateGasStationGeneralScoreTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationGeneralScoreTv"
+        android:inputType="numberDecimal"
+        android:autofillHints="0.0"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/evaluateGasStationGeneralMaxScoreTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/space_8dp"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationGeneralScoreTv"
+        tools:text="/5.0"/>
+
+    <TextView
+        android:id="@+id/evaluateGasStationAttendanceMaxScoreTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:layout_marginTop="@dimen/space_8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/evaluateGasStationGeneralScoreTv"
+        android:text="@string/attendanceScore"/>
+
+    <EditText
+        android:id="@+id/evaluateGasStationAttendanceScoreEt"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/evaluateGasStationAttendanceScoreTv"
+        app:layout_constraintBottom_toBottomOf="@id/evaluateGasStationAttendanceMaxScoreTextTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationAttendanceMaxScoreTextTv"
+        android:inputType="numberDecimal"
+        android:autofillHints="0.0"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/evaluateGasStationAttendanceScoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/space_8dp"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationAttendanceMaxScoreTextTv"
+        tools:text="/5.0"/>
+
+    <TextView
+        android:id="@+id/evaluateGasStationQualityMaxScoreTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/evaluateGasStationAttendanceMaxScoreTextTv"
+        app:layout_constraintTop_toBottomOf="@id/evaluateGasStationAttendanceMaxScoreTextTv"
+        android:text="@string/qualityScore"/>
+
+    <EditText
+        android:id="@+id/evaluateGasStationQualityScoreEt"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/evaluateGasStationQualityScoreTv"
+        app:layout_constraintBottom_toBottomOf="@id/evaluateGasStationQualityMaxScoreTextTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationQualityMaxScoreTextTv"
+        android:inputType="numberDecimal"
+        android:autofillHints="0.0"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/evaluateGasStationQualityScoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/evaluateGasStationAttendanceScoreTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationQualityMaxScoreTextTv"
+        tools:text="/5.0"/>
+
+    <TextView
+        android:id="@+id/evaluateGasStationWaitingTimeMaxScoreTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/evaluateGasStationAttendanceMaxScoreTextTv"
+        app:layout_constraintTop_toBottomOf="@id/evaluateGasStationQualityMaxScoreTextTv"
+        android:text="@string/waitingTimeScore"/>
+
+    <EditText
+        android:id="@+id/evaluateGasStationWaitingTimeScoreEt"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/evaluateGasStationWaitingTimeScoreTv"
+        app:layout_constraintBottom_toBottomOf="@id/evaluateGasStationWaitingTimeMaxScoreTextTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationWaitingTimeMaxScoreTextTv"
+        android:inputType="numberDecimal"
+        android:autofillHints="0.0"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/evaluateGasStationWaitingTimeScoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/evaluateGasStationAttendanceScoreTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationWaitingTimeMaxScoreTextTv"
+        tools:text="/5.0"/>
+
+    <TextView
+        android:id="@+id/evaluateGasStationServiceMaxScoreTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/evaluateGasStationAttendanceMaxScoreTextTv"
+        app:layout_constraintTop_toBottomOf="@id/evaluateGasStationWaitingTimeMaxScoreTextTv"
+        android:text="@string/serviceScore"/>
+
+    <EditText
+        android:id="@+id/evaluateGasStationServiceScoreEt"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/evaluateGasStationServiceScoreTv"
+        app:layout_constraintBottom_toBottomOf="@id/evaluateGasStationServiceMaxScoreTextTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationServiceMaxScoreTextTv"
+        android:inputType="numberDecimal"
+        android:autofillHints="0.0"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/evaluateGasStationServiceScoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/evaluateGasStationAttendanceScoreTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationServiceMaxScoreTextTv"
+        tools:text="/5.0"/>
+
+    <TextView
+        android:id="@+id/evaluateGasStationSafetyMaxScoreTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/evaluateGasStationAttendanceMaxScoreTextTv"
+        app:layout_constraintTop_toBottomOf="@id/evaluateGasStationServiceMaxScoreTextTv"
+        android:text="@string/safetyScore"/>
+
+    <EditText
+        android:id="@+id/evaluateGasStationSafetyScoreEt"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/evaluateGasStationSafetyScoreTv"
+        app:layout_constraintBottom_toBottomOf="@id/evaluateGasStationSafetyMaxScoreTextTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationSafetyMaxScoreTextTv"
+        android:inputType="numberDecimal"
+        android:autofillHints="0.0"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/evaluateGasStationSafetyScoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textSize="24sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/evaluateGasStationAttendanceScoreTv"
+        app:layout_constraintTop_toTopOf="@id/evaluateGasStationSafetyMaxScoreTextTv"
+        tools:text="/5.0"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/evaluateGasStationCommentTil"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        android:hint="@string/commentary"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/evaluateGasStationSafetyScoreTv"
+        app:layout_constraintBottom_toTopOf="@id/evaluateGasStationEvaluateMb"
+        app:layout_constraintEnd_toEndOf="@id/evaluateGasStationAttendanceScoreTv"
+        app:layout_constraintStart_toStartOf="@id/evaluateGasStationAttendanceMaxScoreTextTv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/evaluateGasStationCommentTiet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textCapSentences"
+            android:gravity="center"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/evaluateGasStationEvaluateMb"
+        style="@style/DarkOrangeButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_8dp"
+        android:text="@string/evaluate"
+        app:layout_constraintTop_toBottomOf="@id/evaluateGasStationCommentTil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

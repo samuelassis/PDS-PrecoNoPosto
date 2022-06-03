@@ -18,6 +18,7 @@
     <string name="or_connect_with">Ou conecte-se usando</string>
     <string name="doesnt_have_an_account">Não possui uma conta?</string>
     <string name="sign_in">Cadastre-se</string>
+    <string name="generalScore">Nota Geral:</string>
     <string name="attendanceScore">Qualidade de atendimento:</string>
     <string name="qualityScore">Qualidade do combustível:</string>
     <string name="waitingTimeScore">Tempo de espera:</string>
@@ -36,4 +37,6 @@
     <string name="inicio">Inicio</string>
     <string name="gas_stations">Postos</string>
     <string name="profile">Perfil</string>
+    <string name="evaluateTitle">Avalie o Posto</string>
+    <string name="commentary">Comentário</string>
 </resources>
