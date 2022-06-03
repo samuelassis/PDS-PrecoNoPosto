@@ -18,8 +18,26 @@
     <string name="or_connect_with">Ou conecte-se usando</string>
     <string name="doesnt_have_an_account">Não possui uma conta?</string>
     <string name="sign_in">Cadastre-se</string>
+    <string name="generalScore">Nota Geral:</string>
+    <string name="attendanceScore">Qualidade de atendimento:</string>
+    <string name="qualityScore">Qualidade do combustível:</string>
+    <string name="waitingTimeScore">Tempo de espera:</string>
+    <string name="serviceScore">Qualidade dos serviços:</string>
+    <string name="safetyScore">Segurança:</string>
+    <string name="gasoline">Gasolina</string>
+    <string name="alcohol">Alcool</string>
+    <string name="diesel">Diesel</string>
+    <string name="updatedAt">Atualizado:</string>
+    <string name="update">ATUALIZAR</string>
+    <string name="evaluate">AVALIAR</string>
+    <string name="attendanceScoreCommentary">Atendimento:</string>
+    <string name="qualityScoreCommentary">Combustível:</string>
+    <string name="waitingTimeScoreCommentary">Espera:</string>
+    <string name="serviceScoreCommentary">Serviço:</string>
     <string name="inicio">Inicio</string>
     <string name="gas_stations">Postos</string>
     <string name="profile">Perfil</string>
     <string name="chose_locale">Selecione a localização</string>
+    <string name="evaluateTitle">Avalie o Posto</string>
+    <string name="commentary">Comentário</string>
 </resources>

@@ -27,6 +27,17 @@
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.37435897435897436" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_preco_no_posto_launchscreen.xml" value="0.37435897435897436" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_preco_no_posto_launchscreen_round.xml" value="0.37435897435897436" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/drawable/ic__505662__5__1.xml" value="0.2985" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/drawable/ic_facebook.xml" value="0.2985" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/drawable/ic_google_plus.xml" value="0.2985" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.14735866543095458" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/fragment_evaluate_gas_station.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/fragment_gas_station_details.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/general_score_border.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/layout_edit_price.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/res_item_user_comment.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/res_user_comment.xml" value="0.3009833262077811" />
       </map>
     </option>
   </component>

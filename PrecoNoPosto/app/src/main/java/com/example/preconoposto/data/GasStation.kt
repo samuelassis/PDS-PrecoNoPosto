@@ -8,8 +8,8 @@ data class GasStation(
     @PrimaryKey(autoGenerate = true)
     val idGasStation: Long = 0L,
     val idAddress: Long,
-    val idFuel: Long,
     val idService: Long,
     val idRating: Long,
-    val idPrice: Long
+    val idPrice: Long,
+    val name: String
 )
