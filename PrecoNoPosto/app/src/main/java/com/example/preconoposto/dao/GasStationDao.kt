@@ -30,6 +30,10 @@ interface GasStationDao: GasStationRepository {
     override suspend fun getAllGasStationsAndAddressAndPriceAndService(): List<GasStationAndAddressAndPriceAndService>
 
     @Transaction
+    @Query("SELECT * FROM GasStation WHERE idGasStation == :id")
+    override suspend fun getGasStationsAndAddressAndPriceAndService(id: Long): GasStationAndAddressAndPriceAndService?
+
+    @Transaction
     @Query("SELECT * FROM GasStation INNER JOIN Price WHERE GasStation.idGasStation == Price.idGasStation AND GasStation.idGasStation == :id")
     override suspend fun getGasStationAndPrice(id: Long): GasStationAndPrice
 }

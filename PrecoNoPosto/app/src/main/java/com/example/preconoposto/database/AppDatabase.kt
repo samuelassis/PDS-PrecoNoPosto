@@ -22,7 +22,7 @@ import com.example.preconoposto.data.*
         Session::class,
         User::class
     ],
-    version = 7
+    version = 8
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {

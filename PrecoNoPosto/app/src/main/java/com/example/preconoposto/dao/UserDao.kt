@@ -2,6 +2,7 @@ package com.example.preconoposto.dao
 
 import androidx.room.*
 import com.example.preconoposto.data.User
+import com.example.preconoposto.data.relations.UserWithFavoritesAndGasStation
 import com.example.preconoposto.repository.UserRepository
 
 // Adaptador de saída
@@ -19,4 +20,8 @@ interface UserDao: UserRepository {
 
     @Query("SELECT * FROM user WHERE email = :email AND password = :password")
     override suspend fun getUser(email: String, password: String): User?
+
+    @Transaction
+    @Query("SELECT * FROM user WHERE idUser = :id")
+    override suspend fun getFavorites(id: Long): UserWithFavoritesAndGasStation?
 }
