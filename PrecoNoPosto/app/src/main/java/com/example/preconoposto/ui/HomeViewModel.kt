@@ -3,8 +3,10 @@ package com.example.preconoposto.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.preconoposto.data.Address
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.domain.GasStationFiltersImpl
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,13 +28,14 @@ class HomeViewModel : ViewModel() {
     lateinit var gasStationFilter: GasStationFiltersImpl
 
     fun getAllGasStationsAndAddressAndPriceAndService() {
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                _gasStationsCompleteList.postValue(
+        //if(_gasStationsCompleteList.value.isNullOrEmpty()){
+            CoroutineScope(Dispatchers.IO).launch {
+                val gasStations =
                     gasStationFilter.getAllGasStationsAndAddressAndPriceAndService()
-                )
+                _gasStationsCompleteList.postValue(gasStations)
             }
-        }
+        //}
+        //else _gasStationsCompleteList.postValue(_gasStationsCompleteList.value)
     }
 
     fun getAllGasStationsThatHaveConvenienceStore(){
@@ -191,5 +194,9 @@ class HomeViewModel : ViewModel() {
                 _gasStationsCompleteList.postValue(gasStationsCompleteListAux)
             }
         }
+    }
+
+    fun clearGasStationFilter(){
+        this._gasStationsFilteredSet.postValue(setOf())
     }
 }
