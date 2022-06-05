@@ -52,3 +52,11 @@ Os adaptadores de saída são:
 - UserDao: Implementa a porta de saída UserRepository, comunicando-se com o banco de dados através da biblioteca Room.
 - RatingDao: Implementa a porta de saída RatingRepository, comunicando-se com o banco de dados através da biblioteca Room.
 - GasStationDao: Implementa a porta de saída GasStationRepository, comunicando-se com o banco de dados através da biblioteca Room.
+
+## DDD
+
+### Uso de conceitos de DDD na camada de domínio
+
+### Entidades, objetos de valor, agregados, serviços, repositórios, etc.
+Entidades: Address, Favorite, GasStation, Price, Rating, Service e User.
+![image](https://user-images.githubusercontent.com/49159226/172067832-17b194a2-4820-485d-a2a1-389c080ed1d3.png)
