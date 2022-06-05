@@ -21,7 +21,7 @@ class GasStationFiltersImpl(
         return gasStationRepository.getGasStationsAndAddressAndPriceAndService(id)
     }
 
-    override suspend fun getAllGasStationsThatHaveConvenienceStore(
+    override fun getAllGasStationsThatHaveConvenienceStore(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -30,7 +30,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsThatHaveCarWash(
+    override fun getAllGasStationsThatHaveCarWash(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -39,7 +39,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsThatHaveCalibrator(
+    override fun getAllGasStationsThatHaveCalibrator(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -48,7 +48,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsThatHaveOilChange(
+    override fun getAllGasStationsThatHaveOilChange(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -57,7 +57,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsThatHaveTireShop(
+    override fun getAllGasStationsThatHaveTireShop(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -66,7 +66,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsThatHaveRestaurant(
+    override fun getAllGasStationsThatHaveRestaurant(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -75,7 +75,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsThatHaveMechanical(
+    override fun getAllGasStationsThatHaveMechanical(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -84,7 +84,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsOrderedByGasPrice(
+    override fun getAllGasStationsOrderedByGasPrice(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -93,7 +93,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsOrderedByAlcoholPrice(
+    override fun getAllGasStationsOrderedByAlcoholPrice(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()
@@ -102,7 +102,7 @@ class GasStationFiltersImpl(
         }
     }
 
-    override suspend fun getAllGasStationsOrderedByDieselPrice(
+    override fun getAllGasStationsOrderedByDieselPrice(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?> {
         val filteredGasStations = gasStations.filterNotNull()

@@ -12,43 +12,43 @@ interface GasStationFilters {
         id: Long
     ): GasStationAndAddressAndPriceAndService?
 
-    suspend fun getAllGasStationsThatHaveConvenienceStore(
+    fun getAllGasStationsThatHaveConvenienceStore(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsThatHaveCarWash(
+    fun getAllGasStationsThatHaveCarWash(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsThatHaveCalibrator(
+    fun getAllGasStationsThatHaveCalibrator(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsThatHaveOilChange(
+    fun getAllGasStationsThatHaveOilChange(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsThatHaveTireShop(
+    fun getAllGasStationsThatHaveTireShop(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsThatHaveRestaurant(
+    fun getAllGasStationsThatHaveRestaurant(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsThatHaveMechanical(
+    fun getAllGasStationsThatHaveMechanical(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsOrderedByGasPrice(
+    fun getAllGasStationsOrderedByGasPrice(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsOrderedByAlcoholPrice(
+    fun getAllGasStationsOrderedByAlcoholPrice(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 
-    suspend fun getAllGasStationsOrderedByDieselPrice(
+    fun getAllGasStationsOrderedByDieselPrice(
         gasStations: List<GasStationAndAddressAndPriceAndService?>
     ): List<GasStationAndAddressAndPriceAndService?>
 

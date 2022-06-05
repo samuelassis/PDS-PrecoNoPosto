@@ -6,13 +6,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.HomeFragment">
 
+    <ToggleButton
+        android:id="@+id/homeHasConvenienceStoreTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="11sp"
+        android:textOn="Loja de Conveniencia"
+        android:textOff="Loja de Conveniencia"/>
+
+    <ToggleButton
+        android:id="@+id/homeHasCarWashTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/homeHasConvenienceStoreTb"
+        android:textSize="11sp"
+        android:textOn="Lava Jato"
+        android:textOff="Lava Jato" />
+
+    <ToggleButton
+        android:id="@+id/homeHasCalibratorTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/homeHasCarWashTb"
+        android:textSize="11sp"
+        android:textOn="Calibrador"
+        android:textOff="Calibrador"/>
+
+    <ToggleButton
+        android:id="@+id/homeHasOilChangeTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="11sp"
+        android:textOn="Troca de óleo"
+        android:textOff="Troca de óleo"/>
+
+    <ToggleButton
+        android:id="@+id/homeHasTireShopTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb"
+        app:layout_constraintStart_toEndOf="@id/homeHasOilChangeTb"
+        android:textSize="11sp"
+        android:textOn="Borracharia"
+        android:textOff="Borracharia"/>
+
+    <ToggleButton
+        android:id="@+id/homeHasRestaurantTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb"
+        app:layout_constraintStart_toEndOf="@id/homeHasTireShopTb"
+        android:textSize="11sp"
+        android:textOn="Restaurante"
+        android:textOff="Restaurante"/>
+
+    <ToggleButton
+        android:id="@+id/homeHasMechanicalTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb"
+        app:layout_constraintStart_toEndOf="@id/homeHasRestaurantTb"
+        android:textSize="11sp"
+        android:textOn="Mecânico"
+        android:textOff="Mecânico"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/homeGasStationMap"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:gravity="center"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/homeHasMechanicalTb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

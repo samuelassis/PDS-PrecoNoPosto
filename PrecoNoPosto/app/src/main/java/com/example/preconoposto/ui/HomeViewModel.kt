@@ -3,10 +3,8 @@ package com.example.preconoposto.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.preconoposto.data.Address
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.domain.GasStationFiltersImpl
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,12 +18,19 @@ class HomeViewModel : ViewModel() {
             LiveData<List<GasStationAndAddressAndPriceAndService?>> get() = _gasStationsCompleteList
 
     private var _gasStationsFilteredSet:
-            MutableLiveData<Set<GasStationAndAddressAndPriceAndService>> = MutableLiveData()
+            MutableLiveData<MutableSet<GasStationAndAddressAndPriceAndService>> = MutableLiveData()
 
     val gasStationsFilteredSet:
-            LiveData<Set<GasStationAndAddressAndPriceAndService>> get() = _gasStationsFilteredSet
+            LiveData<MutableSet<GasStationAndAddressAndPriceAndService>> get() = _gasStationsFilteredSet
+
+    private var _gasStationsFilteredSetAux:
+            MutableSet<GasStationAndAddressAndPriceAndService> = mutableSetOf()
 
     lateinit var gasStationFilter: GasStationFiltersImpl
+
+    fun setFilteredList(){
+        _gasStationsFilteredSet.postValue(_gasStationsFilteredSetAux)
+    }
 
     fun getAllGasStationsAndAddressAndPriceAndService() {
         //if(_gasStationsCompleteList.value.isNullOrEmpty()){
@@ -39,144 +44,95 @@ class HomeViewModel : ViewModel() {
     }
 
     fun getAllGasStationsThatHaveConvenienceStore(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                val gasStationsFilteredSetAux =
-                    gasStationFilter
-                    .getAllGasStationsThatHaveConvenienceStore(it)
-                    .filterNotNull()
-                    .toMutableSet()
-
-                gasStationsFilteredSetAux += gasStationsFilteredSet.value.orEmpty()
-
-                _gasStationsFilteredSet.postValue(gasStationsFilteredSetAux)
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsFilteredSetAux += gasStationFilter
+                .getAllGasStationsThatHaveConvenienceStore(it)
+                .filterNotNull()
+                .toMutableSet()
         }
     }
 
     fun getAllGasStationsThatHaveCarWash(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                val gasStationsFilteredSetAux =
-                    gasStationFilter
-                        .getAllGasStationsThatHaveCarWash(it)
-                        .filterNotNull()
-                        .toMutableSet()
-
-                gasStationsFilteredSetAux += gasStationsFilteredSet.value.orEmpty()
-
-                _gasStationsFilteredSet.postValue(gasStationsFilteredSetAux)
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsFilteredSetAux +=
+                gasStationFilter
+                    .getAllGasStationsThatHaveCarWash(it)
+                    .filterNotNull()
+                    .toMutableSet()
         }
     }
 
     fun getAllGasStationsThatHaveCalibrator(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                val gasStationsFilteredSetAux =
-                    gasStationFilter
-                        .getAllGasStationsThatHaveCalibrator(it)
-                        .filterNotNull()
-                        .toMutableSet()
-
-                gasStationsFilteredSetAux += gasStationsFilteredSet.value.orEmpty()
-
-                _gasStationsFilteredSet.postValue(gasStationsFilteredSetAux)
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsFilteredSetAux +=
+                gasStationFilter
+                    .getAllGasStationsThatHaveCalibrator(it)
+                    .filterNotNull()
+                    .toMutableSet()
         }
     }
 
     fun getAllGasStationsThatHaveOilChange(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                val gasStationsFilteredSetAux =
-                    gasStationFilter
-                        .getAllGasStationsThatHaveOilChange(it)
-                        .filterNotNull()
-                        .toMutableSet()
-
-                gasStationsFilteredSetAux += gasStationsFilteredSet.value.orEmpty()
-
-                _gasStationsFilteredSet.postValue(gasStationsFilteredSetAux)
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsFilteredSetAux +=
+                gasStationFilter
+                    .getAllGasStationsThatHaveOilChange(it)
+                    .filterNotNull()
+                    .toMutableSet()
         }
     }
 
     fun getAllGasStationsThatHaveTireShop(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                val gasStationsFilteredSetAux =
-                    gasStationFilter
-                        .getAllGasStationsThatHaveTireShop(it)
-                        .filterNotNull()
-                        .toMutableSet()
-
-                gasStationsFilteredSetAux += gasStationsFilteredSet.value.orEmpty()
-
-                _gasStationsFilteredSet.postValue(gasStationsFilteredSetAux)
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsFilteredSetAux +=
+                gasStationFilter
+                    .getAllGasStationsThatHaveTireShop(it)
+                    .filterNotNull()
+                    .toMutableSet()
         }
     }
 
     fun getAllGasStationsThatHaveRestaurant(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                val gasStationsFilteredSetAux =
-                    gasStationFilter
-                        .getAllGasStationsThatHaveRestaurant(it)
-                        .filterNotNull()
-                        .toMutableSet()
-
-                gasStationsFilteredSetAux += gasStationsFilteredSet.value.orEmpty()
-
-                _gasStationsFilteredSet.postValue(gasStationsFilteredSetAux)
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsFilteredSetAux +=
+                gasStationFilter
+                    .getAllGasStationsThatHaveRestaurant(it)
+                    .filterNotNull()
+                    .toMutableSet()
         }
     }
 
     fun getAllGasStationsThatHaveMechanical(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                val gasStationsFilteredSetAux =
-                    gasStationFilter
-                        .getAllGasStationsThatHaveMechanical(it)
-                        .filterNotNull()
-                        .toMutableSet()
-
-                gasStationsFilteredSetAux += gasStationsFilteredSet.value.orEmpty()
-
-                _gasStationsFilteredSet.postValue(gasStationsFilteredSetAux)
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsFilteredSetAux +=
+                gasStationFilter
+                    .getAllGasStationsThatHaveMechanical(it)
+                    .filterNotNull()
+                    .toMutableSet()
         }
     }
 
     fun getAllGasStationsOrderedByGasPrice(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                _gasStationsCompleteList.postValue(
-                    gasStationFilter.getAllGasStationsOrderedByGasPrice(it)
-                )
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsCompleteList.postValue(
+                gasStationFilter.getAllGasStationsOrderedByGasPrice(it)
+            )
         }
     }
 
     fun getAllGasStationsOrderedByAlcoholPrice(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                _gasStationsCompleteList.postValue(
-                    gasStationFilter.getAllGasStationsOrderedByAlcoholPrice(it)
-                )
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsCompleteList.postValue(
+                gasStationFilter.getAllGasStationsOrderedByAlcoholPrice(it)
+            )
         }
     }
 
     fun getAllGasStationsOrderedByDieselPrice(){
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                _gasStationsCompleteList.postValue(
-                    gasStationFilter.getAllGasStationsOrderedByDieselPrice(it)
-                )
-            }
+        gasStationsCompleteList.value?.let {
+            _gasStationsCompleteList.postValue(
+                gasStationFilter.getAllGasStationsOrderedByDieselPrice(it)
+            )
         }
     }
 
@@ -197,6 +153,6 @@ class HomeViewModel : ViewModel() {
     }
 
     fun clearGasStationFilter(){
-        this._gasStationsFilteredSet.postValue(setOf())
+        this._gasStationsFilteredSetAux = mutableSetOf()
     }
 }

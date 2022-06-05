@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var supportMapFragment: SupportMapFragment
 
-    /*private lateinit var hasConvenienceStore: ToggleButton
+    private lateinit var hasConvenienceStore: ToggleButton
     private lateinit var hasCarWash: ToggleButton
     private lateinit var hasCalibrator: ToggleButton
     private lateinit var hasOilChange: ToggleButton
@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
     private lateinit var hasRestaurant: ToggleButton
     private lateinit var hasMechanical: ToggleButton
 
-    private lateinit var favorites: MaterialButton
+    /*private lateinit var favorites: MaterialButton
     private lateinit var orderByGasPrice: MaterialButton
     private lateinit var orderByAlcoholPrice: MaterialButton
     private lateinit var orderByDieselPrice: MaterialButton*/
@@ -80,13 +80,21 @@ class HomeFragment : Fragment() {
     private fun setupViews(view: View){
         supportMapFragment =
             childFragmentManager.findFragmentById(R.id.homeGasStationMap) as SupportMapFragment
+
+        hasConvenienceStore = view.findViewById(R.id.homeHasConvenienceStoreTb)
+        hasCarWash = view.findViewById(R.id.homeHasCarWashTb)
+        hasCalibrator = view.findViewById(R.id.homeHasCalibratorTb)
+        hasOilChange = view.findViewById(R.id.homeHasOilChangeTb)
+        hasTireShop = view.findViewById(R.id.homeHasTireShopTb)
+        hasRestaurant = view.findViewById(R.id.homeHasRestaurantTb)
+        hasMechanical = view.findViewById(R.id.homeHasMechanicalTb)
     }
 
     private fun setupMap(){
         supportMapFragment.getMapAsync { googleMap ->
 
             googleMap.setInfoWindowAdapter(object: GoogleMap.InfoWindowAdapter {
-                override fun getInfoContents(p0: Marker): View? {
+                override fun getInfoContents(p0: Marker): View {
                     val info = LinearLayout(context)
                     info.orientation = LinearLayout.VERTICAL
 
@@ -116,9 +124,11 @@ class HomeFragment : Fragment() {
             )
 
             viewModel.gasStationsCompleteList.observe(viewLifecycleOwner){
+                googleMap.clear()
                 updateMapMarkers(it, googleMap)
             }
             viewModel.gasStationsFilteredSet.observe(viewLifecycleOwner){
+                googleMap.clear()
                 updateMapMarkers(it.toList(), googleMap)
             }
 
@@ -130,7 +140,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupListeners(){
-        /*hasConvenienceStore.setOnClickListener {
+        hasConvenienceStore.setOnClickListener {
             checkTogglesAndUpdateGasStationFilteredList()
         }
         hasCarWash.setOnClickListener {
@@ -152,7 +162,7 @@ class HomeFragment : Fragment() {
             checkTogglesAndUpdateGasStationFilteredList()
         }
 
-        favorites.setOnClickListener {
+        /*favorites.setOnClickListener {
             viewModel.getAllUserFavorites(userId)
         }
         orderByGasPrice.setOnClickListener {
@@ -169,31 +179,38 @@ class HomeFragment : Fragment() {
     private fun checkTogglesAndUpdateGasStationFilteredList(){
         var noneIsChecked = true
 
-        /*if(hasConvenienceStore.isChecked){
+        if(hasConvenienceStore.isChecked){
+            Log.i("Checked", "hasConvenienceStore")
             viewModel.getAllGasStationsThatHaveConvenienceStore()
             noneIsChecked = false
         }
         if(hasCarWash.isChecked) {
+            Log.i("Checked", "hasCarWash")
             viewModel.getAllGasStationsThatHaveCarWash()
             noneIsChecked = false
         }
         if(hasCalibrator.isChecked) {
+            Log.i("Checked", "hasCalibrator")
             viewModel.getAllGasStationsThatHaveCalibrator()
             noneIsChecked = false
         }
         if(hasOilChange.isChecked) {
+            Log.i("Checked", "hasOilChange")
             viewModel.getAllGasStationsThatHaveOilChange()
             noneIsChecked = false
         }
         if(hasTireShop.isChecked) {
+            Log.i("Checked", "hasTireShop")
             viewModel.getAllGasStationsThatHaveTireShop()
             noneIsChecked = false
         }
         if(hasRestaurant.isChecked) {
+            Log.i("Checked", "hasRestaurant")
             viewModel.getAllGasStationsThatHaveRestaurant()
             noneIsChecked = false
         }
         if(hasMechanical.isChecked) {
+            Log.i("Checked", "hasMechanical")
             viewModel.getAllGasStationsThatHaveMechanical()
             noneIsChecked = false
         }
@@ -201,7 +218,11 @@ class HomeFragment : Fragment() {
         if(noneIsChecked){
             viewModel.clearGasStationFilter()
             viewModel.getAllGasStationsAndAddressAndPriceAndService()
-        }*/
+        }
+        else {
+            viewModel.setFilteredList()
+            viewModel.clearGasStationFilter()
+        }
     }
 
     private fun updateMapMarkers(
