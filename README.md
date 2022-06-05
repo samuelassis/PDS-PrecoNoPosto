@@ -41,12 +41,16 @@ As portas de saída são:
 - GasStationRepository: Interface responsável por comunicar com a tabela de postos.
 
 #### Adaptadores
-O sistema, tabém conta também com 7 adaptadores.
+O sistema, conta com 10 adaptadores, sendo 7 de entrada e 3 de saída.
 Os adaptadores de entrada são:
-- UsarAccesImpl: Implementa a interface de UserAcess utilizando uma implementação da porta de saída UserRepository.
-- GasStationRatingImpl: Implementa a interface de GasStationRating utilizando uma implementação da porta de saída RatingRepository.
-- GasStationFiltersImpl: Implementa a interface de GasStationFilters utilizando uma implementação da porta de saída GasStationRepository e uma implementação para a porta de saída UserRepository.
-- GasStationDetailsImpl: Implementa a interface de GasStationDetails utilizando uma implementação da porta de saída GasStationRepository.
+- EvaluateGasStationViewModel: Adaptador responsável por administrar o estado da tela de avaliação de postos. Utiliza uma instância da classe de domínio GasStationRatingImpl. 
+- GasStationDetailsViewModel: Adaptador responsável por administrar o estado da tela de detalhes de postos. Utiliza uma instância da classe de domínio GasStationRatingImpl. 
+- GasStationsViewModel: // TODO
+- HomeViewModel: Adaptador responsável por administrar o estado da tela de mapa dos postos e seus filtros. Utiliza uma instância da classe de domínio GasStationFiltersImpl. 
+- LoginViewModel: Adaptador responsável por administrar o estado da tela de login. Utiliza uma instância da classe de domínio UsarAccesImpl.
+- ProfileViewModel: // TODO
+- SignUpViewModel: Adaptador responsável por administrar o estado da tela de cadastro. Utiliza uma instância da classe de domínio UsarAccesImpl.
+
 
 Os adaptadores de saída são:
 - UserDao: Implementa a porta de saída UserRepository, comunicando-se com o banco de dados através da biblioteca Room.
@@ -60,3 +64,9 @@ Os adaptadores de saída são:
 ### Entidades, objetos de valor, agregados, serviços, repositórios, etc.
 Entidades: Address, Favorite, GasStation, Price, Rating, Service e User.
 ![image](https://user-images.githubusercontent.com/49159226/172067832-17b194a2-4820-485d-a2a1-389c080ed1d3.png)
+
+### Classes de domínio:
+- UsarAccesImpl: Implementa a interface de UserAcess utilizando uma implementação da porta de saída UserRepository.
+- GasStationRatingImpl: Implementa a interface de GasStationRating utilizando uma implementação da porta de saída RatingRepository.
+- GasStationFiltersImpl: Implementa a interface de GasStationFilters utilizando uma implementação da porta de saída GasStationRepository e uma implementação para a porta de saída UserRepository.
+- GasStationDetailsImpl: Implementa a interface de GasStationDetails utilizando uma implementação da porta de saída GasStationRepository.
