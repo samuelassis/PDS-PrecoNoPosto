@@ -5,6 +5,7 @@ Repositório para projeto prático da disciplina de Praticas de Desenvolvimento 
  - Emerson Gouveia de Faria - 2018111900
  - Fábio Silva Brum - 2018123674
  - Samuel Assis Vieira - 2018109736
+# Sprint 1
  ### Funções
   - Desenvolvedores: Emerson e Fábio
   - Design: Cecilia
@@ -18,4 +19,36 @@ Como o tipo de negócio já é consolidado, Google Maps e ComOferta trazem funci
  - MySQL
 ## Protótipo (Telas)
 https://www.figma.com/file/gTJ67Z6kA0It9GrKbPdkqQ/Pre%C3%A7o-no-Posto---PROD?node-id=0%3A1
+# Sprint 2
 
+## Arquitetura Hexagonal
+
+### Por que estamos adotando essa arquitetura?
+
+### Portas e adaptadores
+
+#### Portas
+O sistema conta com 7 portas, sendo 4 de entrada e 3 de saída. 
+As portas de entrada são:
+- UserAccess: Interface para atividades relacionadas a controle de acesso do usuário (Login/SignUp).
+- GasStationRating: Interface para salvar avaliações dos postos feitas pelos usuários.
+- GasStationFilters: Interface para serviços de filtragem dos postos disponíveis.
+- GasStationDetails: Interface para buscar e calcular as avaliações dos usuários.
+
+As portas de saída são:
+- UserRepository: Interface responsável por comunicar com a tabela de usuários.
+- RatingRepository: Interface responsável por comunicar com a tabela de avaliações.
+- GasStationRepository: Interface responsável por comunicar com a tabela de postos.
+
+#### Adaptadores
+O sistema, tabém conta também com 7 adaptadores.
+Os adaptadores de entrada são:
+- UsarAccesImpl: Implementa a interface de UserAcess utilizando uma implementação da porta de saída UserRepository.
+- GasStationRatingImpl: Implementa a interface de GasStationRating utilizando uma implementação da porta de saída RatingRepository.
+- GasStationFiltersImpl: Implementa a interface de GasStationFilters utilizando uma implementação da porta de saída GasStationRepository e uma implementação para a porta de saída UserRepository.
+- GasStationDetailsImpl: Implementa a interface de GasStationDetails utilizando uma implementação da porta de saída GasStationRepository.
+
+Os adaptadores de saída são:
+- UserDao: Implementa a porta de saída UserRepository, comunicando-se com o banco de dados através da biblioteca Room.
+- RatingDao: Implementa a porta de saída RatingRepository, comunicando-se com o banco de dados através da biblioteca Room.
+- GasStationDao: Implementa a porta de saída GasStationRepository, comunicando-se com o banco de dados através da biblioteca Room.
