@@ -110,4 +110,8 @@ class GasStationDetailsImpl(
         favoriteRepository.delete(favorite)
     }
 
+    override suspend fun getAllGasStationAndPrice(): List<GasStationAndPrice> {
+        return gasStationRepository.getAllGasStationAndPrice()
+    }
+
 }

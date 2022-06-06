@@ -1,6 +1,7 @@
 package com.example.preconoposto.domain
 
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
+import com.example.preconoposto.data.relations.GasStationAndPrice
 import com.example.preconoposto.data.relations.UserWithFavoritesAndGasStation
 
 interface GasStationFilters {
@@ -41,16 +42,16 @@ interface GasStationFilters {
     ): List<GasStationAndAddressAndPriceAndService?>
 
     fun getAllGasStationsOrderedByGasPrice(
-        gasStations: List<GasStationAndAddressAndPriceAndService?>
-    ): List<GasStationAndAddressAndPriceAndService?>
+        gasStations: List<GasStationAndPrice?>
+    ): List<GasStationAndPrice?>
 
     fun getAllGasStationsOrderedByAlcoholPrice(
-        gasStations: List<GasStationAndAddressAndPriceAndService?>
-    ): List<GasStationAndAddressAndPriceAndService?>
+        gasStations: List<GasStationAndPrice?>
+    ): List<GasStationAndPrice?>
 
     fun getAllGasStationsOrderedByDieselPrice(
-        gasStations: List<GasStationAndAddressAndPriceAndService?>
-    ): List<GasStationAndAddressAndPriceAndService?>
+        gasStations: List<GasStationAndPrice?>
+    ): List<GasStationAndPrice?>
 
     suspend fun getAllUserFavorites(
         userId: Long

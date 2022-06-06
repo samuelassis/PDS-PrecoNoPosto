@@ -1,6 +1,7 @@
 package com.example.preconoposto.domain
 
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
+import com.example.preconoposto.data.relations.GasStationAndPrice
 import com.example.preconoposto.data.relations.UserWithFavoritesAndGasStation
 import com.example.preconoposto.repository.FavoriteRepository
 import com.example.preconoposto.repository.GasStationRepository
@@ -87,29 +88,29 @@ class GasStationFiltersImpl(
     }
 
     override fun getAllGasStationsOrderedByGasPrice(
-        gasStations: List<GasStationAndAddressAndPriceAndService?>
-    ): List<GasStationAndAddressAndPriceAndService?> {
+        gasStations: List<GasStationAndPrice?>
+    ): List<GasStationAndPrice?> {
         val filteredGasStations = gasStations.filterNotNull()
         return filteredGasStations.sortedBy {
-            it.price.gasolinePrice
+            it.price?.gasolinePrice
         }
     }
 
     override fun getAllGasStationsOrderedByAlcoholPrice(
-        gasStations: List<GasStationAndAddressAndPriceAndService?>
-    ): List<GasStationAndAddressAndPriceAndService?> {
+        gasStations: List<GasStationAndPrice?>
+    ): List<GasStationAndPrice?> {
         val filteredGasStations = gasStations.filterNotNull()
         return filteredGasStations.sortedBy {
-            it.price.alcoholPrice
+            it.price?.alcoholPrice
         }
     }
 
     override fun getAllGasStationsOrderedByDieselPrice(
-        gasStations: List<GasStationAndAddressAndPriceAndService?>
-    ): List<GasStationAndAddressAndPriceAndService?> {
+        gasStations: List<GasStationAndPrice?>
+    ): List<GasStationAndPrice?> {
         val filteredGasStations = gasStations.filterNotNull()
         return filteredGasStations.sortedBy {
-            it.price.dieselPrice
+            it.price?.dieselPrice
         }
     }
 

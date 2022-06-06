@@ -221,81 +221,81 @@ class MainActivity : AppCompatActivity() {
         val price1 = Price(
             idPrice = 1,
             idGasStation = 1,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 5.849,
+            alcoholPrice = 7.650,
+            dieselPrice = 6.658,
             lastUpdateDate = Date(20210503)
         )
         val price2 = Price(
             idPrice = 2,
             idGasStation = 2,
-            gasolinePrice = 2.0,
-            alcoholPrice = 2.0,
-            dieselPrice = 2.0,
+            gasolinePrice = 6.564,
+            alcoholPrice = 7.521,
+            dieselPrice = 7.123,
             lastUpdateDate = Date(20210502)
         )
         val price3 = Price(
             idPrice = 3,
             idGasStation = 3,
-            gasolinePrice = 3.0,
-            alcoholPrice = 3.0,
-            dieselPrice = 3.0,
+            gasolinePrice = 6.321,
+            alcoholPrice = 5.312,
+            dieselPrice = 7.540,
             lastUpdateDate = Date(20210503)
         )
         val price4 = Price(
             idPrice = 4,
             idGasStation = 4,
-            gasolinePrice = 4.0,
-            alcoholPrice = 4.0,
-            dieselPrice = 4.0,
+            gasolinePrice = 6.31,
+            alcoholPrice = 7.345,
+            dieselPrice = 7.354,
             lastUpdateDate = Date(20210503)
         )
         val price5 = Price(
             idPrice = 5,
             idGasStation = 5,
-            gasolinePrice = 5.0,
-            alcoholPrice = 5.0,
-            dieselPrice = 5.0,
+            gasolinePrice = 8.54,
+            alcoholPrice = 6.352,
+            dieselPrice = 9.325,
             lastUpdateDate = Date(20210503)
         )
         val price6 = Price(
             idPrice = 6,
             idGasStation = 6,
-            gasolinePrice = 6.0,
-            alcoholPrice = 6.0,
-            dieselPrice = 6.0,
+            gasolinePrice = 7.354,
+            alcoholPrice = 6.54,
+            dieselPrice = 6.58,
             lastUpdateDate = Date(20210503)
         )
         val price7 = Price(
             idPrice = 7,
             idGasStation = 7,
-            gasolinePrice = 7.0,
-            alcoholPrice = 7.0,
-            dieselPrice = 7.0,
+            gasolinePrice = 7.984,
+            alcoholPrice = 7.645,
+            dieselPrice = 7.198,
             lastUpdateDate = Date(20210503)
         )
         val price8 = Price(
             idPrice = 8,
             idGasStation = 8,
-            gasolinePrice = 8.0,
-            alcoholPrice = 8.0,
-            dieselPrice = 8.0,
+            gasolinePrice = 8.64,
+            alcoholPrice = 4.354,
+            dieselPrice = 6.345,
             lastUpdateDate = Date(20210503)
         )
         val price9 = Price(
             idPrice = 9,
             idGasStation = 9,
-            gasolinePrice = 9.0,
-            alcoholPrice = 9.0,
-            dieselPrice = 9.0,
+            gasolinePrice = 5.354,
+            alcoholPrice = 6.59,
+            dieselPrice = 7.546,
             lastUpdateDate = Date(20210503)
         )
         val price10 = Price(
             idPrice = 10,
             idGasStation = 10,
-            gasolinePrice = 10.0,
-            alcoholPrice = 10.0,
-            dieselPrice = 10.0,
+            gasolinePrice = 6.647,
+            alcoholPrice = 7.543,
+            dieselPrice = 8.15,
             lastUpdateDate = Date(20210503)
         )
 
@@ -324,35 +324,35 @@ class MainActivity : AppCompatActivity() {
         val service3 = Service(
             idService = 3,
             idGasStation = 3,
-            hasConvenienceStore = false,
+            hasConvenienceStore = true,
             hasCarWash = false,
             hasCalibrator = true,
             hasOilChange = false,
             hasTireShop = false,
-            hasRestaurant = false,
+            hasRestaurant = true,
             hasMechanical = false
         )
         val service4 = Service(
             idService = 4,
             idGasStation = 4,
-            hasConvenienceStore = false,
+            hasConvenienceStore = true,
             hasCarWash = false,
-            hasCalibrator = false,
+            hasCalibrator = true,
             hasOilChange = true,
             hasTireShop = false,
-            hasRestaurant = false,
+            hasRestaurant = true,
             hasMechanical = false
         )
         val service5 = Service(
             idService = 5,
             idGasStation = 5,
             hasConvenienceStore = false,
-            hasCarWash = false,
+            hasCarWash = true,
             hasCalibrator = false,
             hasOilChange = false,
             hasTireShop = true,
             hasRestaurant = false,
-            hasMechanical = false
+            hasMechanical = true
         )
         val service6 = Service(
             idService = 6,
@@ -360,18 +360,18 @@ class MainActivity : AppCompatActivity() {
             hasConvenienceStore = false,
             hasCarWash = false,
             hasCalibrator = false,
-            hasOilChange = false,
+            hasOilChange = true,
             hasTireShop = false,
             hasRestaurant = true,
-            hasMechanical = false
+            hasMechanical = true
         )
         val service7 = Service(
             idService = 7,
             idGasStation = 7,
             hasConvenienceStore = false,
-            hasCarWash = false,
+            hasCarWash = true,
             hasCalibrator = false,
-            hasOilChange = false,
+            hasOilChange = true,
             hasTireShop = false,
             hasRestaurant = false,
             hasMechanical = true
@@ -460,7 +460,7 @@ class MainActivity : AppCompatActivity() {
         )
         val rating3 = Rating(
             idRating = 3,
-            idGasStation = 1,
+            idGasStation = 7,
             idUser = 3,
             generalScore = 4.6,
             attendanceScore = 5.0,
@@ -468,6 +468,110 @@ class MainActivity : AppCompatActivity() {
             waitingTimeScore = 2.9,
             serviceScore = 4.3,
             safetyScore = 2.3,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating4 = Rating(
+            idRating = 4,
+            idGasStation = 2,
+            idUser = 2,
+            generalScore = 4.0,
+            attendanceScore = 3.2,
+            qualityScore = 4.8,
+            waitingTimeScore = 3.1,
+            serviceScore = 4.1,
+            safetyScore = 5.0,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating5 = Rating(
+            idRating = 5,
+            idGasStation = 3,
+            idUser = 2,
+            generalScore = 3.1,
+            attendanceScore = 4.2,
+            qualityScore = 5.0,
+            waitingTimeScore = 2.9,
+            serviceScore = 3.8,
+            safetyScore = 4.8,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating6 = Rating(
+            idRating = 6,
+            idGasStation = 4,
+            idUser = 2,
+            generalScore = 4.6,
+            attendanceScore = 5.0,
+            qualityScore = 4.8,
+            waitingTimeScore = 4.7,
+            serviceScore = 4.6,
+            safetyScore = 4.0,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating7 = Rating(
+            idRating = 7,
+            idGasStation = 5,
+            idUser = 2,
+            generalScore = 4.0,
+            attendanceScore = 2.2,
+            qualityScore = 3.8,
+            waitingTimeScore = 4.1,
+            serviceScore = 1.1,
+            safetyScore = 4.2,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating8 = Rating(
+            idRating = 8,
+            idGasStation = 6,
+            idUser = 2,
+            generalScore = 4.0,
+            attendanceScore = 3.2,
+            qualityScore = 4.8,
+            waitingTimeScore = 3.1,
+            serviceScore = 4.1,
+            safetyScore = 5.0,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating9 = Rating(
+            idRating = 9,
+            idGasStation = 8,
+            idUser = 2,
+            generalScore = 3.2,
+            attendanceScore = 4.2,
+            qualityScore = 3.8,
+            waitingTimeScore = 4.1,
+            serviceScore = 4.1,
+            safetyScore = 4.0,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating10 = Rating(
+            idRating = 10,
+            idGasStation = 9,
+            idUser = 2,
+            generalScore = 3.0,
+            attendanceScore = 4.2,
+            qualityScore = 3.8,
+            waitingTimeScore = 4.1,
+            serviceScore = 4.9,
+            safetyScore = 3.9,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating11 = Rating(
+            idRating = 11,
+            idGasStation = 10,
+            idUser = 2,
+            generalScore = 4.3,
+            attendanceScore = 4.2,
+            qualityScore = 4.8,
+            waitingTimeScore = 4.1,
+            serviceScore = 4.9,
+            safetyScore = 5.0,
             commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
             date = Date(20211010)
         )
@@ -524,6 +628,14 @@ class MainActivity : AppCompatActivity() {
             ratingDao.save(rating1)
             ratingDao.save(rating2)
             ratingDao.save(rating3)
+            ratingDao.save(rating4)
+            ratingDao.save(rating5)
+            ratingDao.save(rating6)
+            ratingDao.save(rating7)
+            ratingDao.save(rating8)
+            ratingDao.save(rating9)
+            ratingDao.save(rating10)
+            ratingDao.save(rating11)
         }
     }
 }

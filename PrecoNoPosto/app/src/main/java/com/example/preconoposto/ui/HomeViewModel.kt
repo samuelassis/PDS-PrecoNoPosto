@@ -124,52 +124,6 @@ class HomeViewModel : ViewModel() {
         aux = _gasStationsFilteredSetAux.toList()
     }
 
-    fun getAllGasStationsOrderedByGasPrice(){
-        gasStationsCompleteList.value?.let {
-            _gasStationsCompleteList.postValue(
-                gasStationFilter.getAllGasStationsOrderedByGasPrice(it)
-            )
-        }
-    }
-
-    fun getAllGasStationsOrderedByAlcoholPrice(){
-        gasStationsCompleteList.value?.let {
-            _gasStationsCompleteList.postValue(
-                gasStationFilter.getAllGasStationsOrderedByAlcoholPrice(it)
-            )
-        }
-    }
-
-    fun getAllGasStationsOrderedByDieselPrice(){
-        gasStationsCompleteList.value?.let {
-            _gasStationsCompleteList.postValue(
-                gasStationFilter.getAllGasStationsOrderedByDieselPrice(it)
-            )
-        }
-    }
-
-    fun getAllUserFavorites(userId: Long) {
-        CoroutineScope(Dispatchers.IO).launch {
-            gasStationsCompleteList.value?.let {
-                val userFavorites = gasStationFilter.getAllUserFavorites(userId)
-                val favoriteGasStationIds = userFavorites?.favorites?.map {
-                    it.favorite.idGasStation
-                }
-                val aux = favoriteGasStationIds?.map {
-                    gasStationFilter.getGasStationsAndAddressAndPriceAndService(it)
-                }
-                aux?.forEach { gasStation ->
-                    gasStation?.let {
-                        _gasStationsFilteredSetAux += mutableSetOf(gasStation)
-                    }
-
-                }
-
-                setFilteredList()
-            }
-        }
-    }
-
     fun clearGasStationFilter(){
         this._gasStationsFilteredSetAux = mutableSetOf()
     }

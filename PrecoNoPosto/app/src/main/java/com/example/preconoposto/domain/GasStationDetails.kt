@@ -17,4 +17,6 @@ interface GasStationDetails {
     suspend fun saveFavorite(favorite: Favorite)
 
     suspend fun deleteFavorite(userId: Long, gasStationId: Long)
+
+    suspend fun getAllGasStationAndPrice(): List<GasStationAndPrice>
 }
