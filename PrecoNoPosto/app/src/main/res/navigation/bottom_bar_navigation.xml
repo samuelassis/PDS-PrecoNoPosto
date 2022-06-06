@@ -11,11 +11,12 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/fromHomeFragmentToGasStationsFragment"
-            app:destination="@id/gasStationsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/fromHomeFragmentToGasStationDetailsFragment"
+            app:destination="@id/gasStationDetailsFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="gasStationId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/gasStationsFragment"
@@ -27,4 +28,13 @@
         android:name="com.example.preconoposto.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/gasStationDetailsFragment"
+        android:name="com.example.preconoposto.ui.GasStationDetailsFragment"
+        android:label="fragment_gas_station_details"
+        tools:layout="@layout/fragment_gas_station_details" >
+        <argument
+            android:name="gasStationId"
+            app:argType="long" />
+    </fragment>
 </navigation>

@@ -37,6 +37,7 @@
     <string name="inicio">Inicio</string>
     <string name="gas_stations">Postos</string>
     <string name="profile">Perfil</string>
+    <string name="chose_locale">Selecione a localização</string>
     <string name="evaluateTitle">Avalie o Posto</string>
     <string name="commentary">Comentário</string>
 </resources>

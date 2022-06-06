@@ -7,31 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.ToggleButton
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.preconoposto.R
-import com.example.preconoposto.data.Favorite
 import com.example.preconoposto.database.AppDatabase
-import com.example.preconoposto.database.dataStore
-import com.example.preconoposto.database.loggedUserIdPreference
 import com.example.preconoposto.domain.GasStationDetailsImpl
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 class GasStationDetailsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = GasStationDetailsFragment()
-    }
+    private val args: GasStationDetailsFragmentArgs by navArgs()
 
-    val gasStationId : Long = 1
-    private var userId: Long = 1
+    private var gasStationId: Long = 0L
 
-    private lateinit var gasStationName: TextView
+    private lateinit var gasStationToolBar: MaterialToolbar
     private lateinit var attendanceScore: TextView
     private lateinit var qualityScore: TextView
     private lateinit var waitingTimeScore: TextView
@@ -45,7 +36,6 @@ class GasStationDetailsFragment : Fragment() {
     private lateinit var dieselPriceUpdateDate: TextView
     private lateinit var generalScore: TextView
 
-    private lateinit var favoriteToggle: ToggleButton
     private lateinit var gasStationDetailsGasolineUpdateMb: MaterialButton
     private lateinit var gasStationDetailsAlcoholUpdateMb: MaterialButton
     private lateinit var gasStationDetailsDieselUpdateMb: MaterialButton
@@ -54,32 +44,28 @@ class GasStationDetailsFragment : Fragment() {
     private lateinit var gasStationDetailsAdapter: GasStationDetailsAdapter
 
     private lateinit var viewModel: GasStationDetailsViewModel
-
     private val gasStationDao by lazy {
         AppDatabase.getInstance(this.requireContext()).gasStationDao
     }
-    private val favoriteDao by lazy {
-        AppDatabase.getInstance(this.requireContext()).favoriteDao
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        gasStationId = args.gasStationId
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        CoroutineScope(Dispatchers.IO).launch {
-            activity?.dataStore?.data?.map {
-                userId = it[loggedUserIdPreference]?.toLong() ?: 1
-            }
-        }
         return inflater.inflate(R.layout.fragment_gas_station_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[GasStationDetailsViewModel::class.java]
-        viewModel.gasStationDetailsImpl = GasStationDetailsImpl(favoriteDao, gasStationDao)
+        viewModel.gasStationDetailsImpl = GasStationDetailsImpl(gasStationDao)
 
-        gasStationName = view.findViewById(R.id.gasStationDetailsGasStationNameTv)
+        gasStationToolBar = view.findViewById(R.id.gasStationsDetailsToolbar)
 
         generalScore = view.findViewById(R.id.gasStationDetailsGeneralScoreTv)
         attendanceScore = view.findViewById(R.id.gasStationDetailsAttendanceScoreTv)
@@ -95,18 +81,18 @@ class GasStationDetailsFragment : Fragment() {
         dieselPrice = view.findViewById(R.id.gasStationDetailsDieselPriceTv)
         dieselPriceUpdateDate = view.findViewById(R.id.gasStationDetailsDieselUpdatedDateTv)
 
-        favoriteToggle = view.findViewById(R.id.gasStationDetailsFavoriteTb)
-        gasStationDetailsGasolineUpdateMb = view.findViewById(R.id.gasStationDetailsGasolineUpdateMb)
+        gasStationDetailsGasolineUpdateMb =
+            view.findViewById(R.id.gasStationDetailsGasolineUpdateMb)
         gasStationDetailsAlcoholUpdateMb = view.findViewById(R.id.gasStationDetailsAlcoholUpdateMb)
         gasStationDetailsDieselUpdateMb = view.findViewById(R.id.gasStationDetailsDieselUpdateMb)
 
         userCommentsRecycleView = view.findViewById(R.id.gasStationDetailsCommentsRv)
 
-        setupListeners()
+        setupListeners(view)
         setupObservers(view)
     }
 
-    private fun setupListeners() {
+    private fun setupListeners(view: View) {
         gasStationDetailsGasolineUpdateMb.setOnClickListener {
 
         }
@@ -116,18 +102,12 @@ class GasStationDetailsFragment : Fragment() {
         gasStationDetailsGasolineUpdateMb.setOnClickListener {
 
         }
-
-        favoriteToggle.setOnClickListener{
-            if(favoriteToggle.isChecked) {
-                viewModel.saveFavorite(Favorite(idUser = userId, idGasStation = gasStationId))
-            }
-            else {
-                viewModel.deleteFavorite(userId, gasStationId)
-            }
+        gasStationToolBar.setOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 
-    private fun setupObservers(view: View){
+    private fun setupObservers(view: View) {
         viewModel.getPriceTexts(gasStationId).observe(viewLifecycleOwner) { map ->
             val date = map.getValue("date")
 
@@ -135,7 +115,7 @@ class GasStationDetailsFragment : Fragment() {
             gasPriceUpdateDate.text = date
             alcoholPrice.text = map.getValue("alcoholPrice")
             alcoholPriceUpdateDate.text = date
-            dieselPrice.text =map.getValue("dieselPrice")
+            dieselPrice.text = map.getValue("dieselPrice")
             dieselPriceUpdateDate.text = date
         }
 
@@ -148,15 +128,15 @@ class GasStationDetailsFragment : Fragment() {
             safetyScore.text = map.getValue("safetyScore")
         }
 
-        viewModel.getGasStationWithRatingsAndUser(gasStationId).observe(viewLifecycleOwner) {
-            gasStationWithRatingsAndUser ->
-                gasStationName.text = gasStationWithRatingsAndUser.gasStation.name
+        viewModel.getGasStationWithRatingsAndUser(gasStationId)
+            .observe(viewLifecycleOwner) { gasStationWithRatingsAndUser ->
+                gasStationToolBar.title = gasStationWithRatingsAndUser.gasStation.name
                 gasStationWithRatingsAndUser.ratings?.let { ratingAndUserList ->
                     gasStationDetailsAdapter = GasStationDetailsAdapter()
                     gasStationDetailsAdapter.setComments(ratingAndUserList)
                     userCommentsRecycleView.layoutManager = LinearLayoutManager(view.context)
                     userCommentsRecycleView.adapter = gasStationDetailsAdapter
                 }
-        }
+            }
     }
 }

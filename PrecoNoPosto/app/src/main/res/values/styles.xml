@@ -21,4 +21,9 @@
     <style name="Circular">
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="GasStationsDetailTile">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

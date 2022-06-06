@@ -27,9 +27,5 @@
         android:name="com.example.preconoposto.ui.SignupFragment"
         android:label="Cadastrar"
         tools:layout="@layout/fragment_signup" />
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.preconoposto.ui.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+
 </navigation>

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:title="@string/inicio" android:icon="@drawable/ic_home"/>
-    <item android:title="@string/gas_stations" android:icon="@drawable/ic_gas_station"/>
-    <item android:title="@string/profile" android:icon="@drawable/ic_profile"/>
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/inicio" />
+    <item
+        android:id="@+id/gasStationsFragment"
+        android:icon="@drawable/ic_gas_station"
+        android:title="@string/gas_stations" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile" />
 </menu>
