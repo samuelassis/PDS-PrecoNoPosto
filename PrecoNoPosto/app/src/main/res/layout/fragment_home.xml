@@ -44,8 +44,8 @@
             android:src="@drawable/ic_tune"
             app:layout_constraintBottom_toBottomOf="@+id/homeChoseLocaleTextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeChoseLocaleTextInputLayout"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintTop_tobott="@+id/homeChoseLocaleTextInputLayout"
             app:tint="@color/icon_grey_color" />
 
         <ToggleButton
@@ -67,8 +67,8 @@
             android:layout_marginVertical="@dimen/space_16dp"
             android:textOff="Lava Jato"
             android:textOn="Lava Jato"
-            app:layout_constraintEnd_toStartOf="@+id/homeHasCalibratorTb"
             android:textSize="11sp"
+            app:layout_constraintEnd_toStartOf="@+id/homeHasCalibratorTb"
             app:layout_constraintStart_toEndOf="@id/homeHasConvenienceStoreTb"
             app:layout_constraintTop_toBottomOf="@+id/homeChoseLocaleTextInputLayout" />
 
@@ -77,10 +77,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/space_16dp"
+            android:layout_marginEnd="@dimen/margin_horizontal"
             android:textOff="Calibrador"
             android:textOn="Calibrador"
             android:textSize="11sp"
-            android:layout_marginEnd="@dimen/margin_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/homeHasCarWashTb"
             app:layout_constraintTop_toBottomOf="@+id/homeChoseLocaleTextInputLayout" />
@@ -93,6 +93,7 @@
             android:textOff="Troca de óleo"
             android:textOn="Troca de óleo"
             android:textSize="11sp"
+            app:layout_constraintEnd_toStartOf="@+id/homeHasTireShopTb"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb" />
 
@@ -123,10 +124,10 @@
             android:id="@+id/homeHasMechanicalTb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_horizontal"
             android:textOff="Mecânico"
             android:textOn="Mecânico"
             android:textSize="11sp"
-            android:layout_marginEnd="@dimen/margin_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/homeHasRestaurantTb"
             app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb" />
@@ -136,8 +137,8 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:gravity="center"
             android:layout_marginVertical="@dimen/margin_vertical"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

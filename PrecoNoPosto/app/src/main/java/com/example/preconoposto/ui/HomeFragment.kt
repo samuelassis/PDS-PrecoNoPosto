@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.preconoposto.R
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.database.AppDatabase
@@ -72,7 +73,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews(view)
-        setupMap()
+        setupMap(view)
         setupListeners()
         viewModel.getAllGasStationsAndAddressAndPriceAndService()
     }
@@ -90,7 +91,7 @@ class HomeFragment : Fragment() {
         hasMechanical = view.findViewById(R.id.homeHasMechanicalTb)
     }
 
-    private fun setupMap(){
+    private fun setupMap(view: View){
         supportMapFragment.getMapAsync { googleMap ->
 
             googleMap.setInfoWindowAdapter(object: GoogleMap.InfoWindowAdapter {
@@ -133,6 +134,9 @@ class HomeFragment : Fragment() {
             }
 
             googleMap.setOnInfoWindowClickListener {
+                val gasStationId = it.tag.toString().toLong()
+                val action = HomeFragmentDirections.fromHomeFragmentToGasStationDetailsFragment(gasStationId)
+                view.findNavController().navigate(action)
                 Log.i("Marker", it.tag.toString())
             }
 
