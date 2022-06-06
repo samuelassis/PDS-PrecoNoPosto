@@ -10,8 +10,14 @@ import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.example.preconoposto.data.Rating
 import com.example.preconoposto.database.AppDatabase
+import com.example.preconoposto.database.dataStore
+import com.example.preconoposto.database.loggedUserIdPreference
 import com.example.preconoposto.databinding.FragmentEvaluateGasStationBinding
 import com.example.preconoposto.domain.GasStationRatingImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.sql.Date
 
 class EvaluateGasStationFragment : Fragment() {
@@ -41,6 +47,11 @@ class EvaluateGasStationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        CoroutineScope(Dispatchers.IO).launch {
+            requireContext().dataStore.data.collect {
+                userId = it[loggedUserIdPreference]?.toLong() ?: 0L
+            }
+        }
         setupObservers()
         setupListeners()
     }
