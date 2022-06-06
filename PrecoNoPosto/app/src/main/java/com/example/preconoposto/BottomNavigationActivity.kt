@@ -1,4 +1,4 @@
-package com.example.preconoposto.ui
+package com.example.preconoposto
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

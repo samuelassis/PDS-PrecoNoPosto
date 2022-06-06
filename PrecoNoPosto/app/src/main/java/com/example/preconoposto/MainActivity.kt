@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.preconoposto.databinding.MainActivityBinding
+import com.example.preconoposto.ui.SignupFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         setupNavBar()
 
 
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.container, SignupFragment.newInstance())
-//                .commitNow()
-//        }
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, SignupFragment.newInstance())
+                .commitNow()
+        }
     }
 
     private fun setupNavBar() {

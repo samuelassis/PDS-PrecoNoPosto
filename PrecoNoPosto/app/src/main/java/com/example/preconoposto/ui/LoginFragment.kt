@@ -1,5 +1,6 @@
 package com.example.preconoposto.ui
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.preconoposto.BottomNavigationActivity
 import com.example.preconoposto.data.User
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
@@ -63,14 +64,16 @@ class LoginFragment : Fragment() {
 
     private fun setupObservers() {
         loginViewModel.isLoginCorrect.observe(viewLifecycleOwner) { isLoginCorrect ->
-            if (isLoginCorrect)
-                findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
-            else
-                Toast.makeText(
-                    this.requireContext(),
-                    "Usuário ou senha incorretos",
-                    Toast.LENGTH_SHORT
-                ).show()
+            startActivity(Intent(requireContext(), BottomNavigationActivity::class.java))
+//            findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
+//            if (isLoginCorrect)
+//                findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
+//            else
+//                Toast.makeText(
+//                    this.requireContext(),
+//                    "Usuário ou senha incorretos",
+//                    Toast.LENGTH_SHORT
+//                ).show()
         }
     }
 
