@@ -20,7 +20,7 @@
             android:value="AIzaSyBQsnoB4qlqR9T8RoBCvV9GeEdX_-bXzXc" />
 
         <activity
-            android:name=".ui.BottomNavigationActivity"
+            android:name=".BottomNavigationActivity"
             android:exported="true">
         </activity>
         <activity

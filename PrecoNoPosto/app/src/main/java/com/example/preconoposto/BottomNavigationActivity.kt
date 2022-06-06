@@ -1,4 +1,4 @@
-package com.example.preconoposto.ui
+package com.example.preconoposto
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +16,7 @@ class BottomNavigationActivity : AppCompatActivity() {
         viewBinding = ActivityBottomNavigationBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(viewBinding.fragmentContainerView3.id) as NavHostFragment
+        val navHostFragment = (supportFragmentManager.findFragmentById(viewBinding.fragmentContainerView3.id)) as NavHostFragment
         val navController = navHostFragment.navController
 
         viewBinding.bottomNavigationView.setupWithNavController(navController)
