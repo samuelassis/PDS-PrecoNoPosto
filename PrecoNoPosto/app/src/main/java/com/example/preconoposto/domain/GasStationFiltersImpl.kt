@@ -2,11 +2,13 @@ package com.example.preconoposto.domain
 
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.data.relations.UserWithFavoritesAndGasStation
+import com.example.preconoposto.repository.FavoriteRepository
 import com.example.preconoposto.repository.GasStationRepository
 import com.example.preconoposto.repository.UserRepository
 
 class GasStationFiltersImpl(
     private val userRepository: UserRepository,
+    private val favoriteRepository: FavoriteRepository,
     private val gasStationRepository: GasStationRepository
 ): GasStationFilters {
 

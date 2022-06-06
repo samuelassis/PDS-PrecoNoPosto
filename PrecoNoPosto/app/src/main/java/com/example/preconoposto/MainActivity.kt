@@ -7,10 +7,7 @@ import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.preconoposto.data.Address
-import com.example.preconoposto.data.GasStation
-import com.example.preconoposto.data.Price
-import com.example.preconoposto.data.Service
+import com.example.preconoposto.data.*
 import com.example.preconoposto.database.AppDatabase
 import com.example.preconoposto.databinding.MainActivityBinding
 import kotlinx.coroutines.CoroutineScope
@@ -65,6 +62,8 @@ class MainActivity : AppCompatActivity() {
         val serviceDao = db.serviceDao
         val gasStationDao = db.gasStationDao
         val addressDao = db.addressDao
+        val ratingDao = db.ratingDao
+        val userDao = db.userDao
 
         val gasStation1 = GasStation(
             idGasStation = 1,
@@ -237,65 +236,65 @@ class MainActivity : AppCompatActivity() {
         val price3 = Price(
             idPrice = 3,
             idGasStation = 3,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 3.0,
+            alcoholPrice = 3.0,
+            dieselPrice = 3.0,
             lastUpdateDate = Date(20210503)
         )
         val price4 = Price(
             idPrice = 4,
             idGasStation = 4,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 4.0,
+            alcoholPrice = 4.0,
+            dieselPrice = 4.0,
             lastUpdateDate = Date(20210503)
         )
         val price5 = Price(
             idPrice = 5,
             idGasStation = 5,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 5.0,
+            alcoholPrice = 5.0,
+            dieselPrice = 5.0,
             lastUpdateDate = Date(20210503)
         )
         val price6 = Price(
             idPrice = 6,
             idGasStation = 6,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 6.0,
+            alcoholPrice = 6.0,
+            dieselPrice = 6.0,
             lastUpdateDate = Date(20210503)
         )
         val price7 = Price(
             idPrice = 7,
             idGasStation = 7,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 7.0,
+            alcoholPrice = 7.0,
+            dieselPrice = 7.0,
             lastUpdateDate = Date(20210503)
         )
         val price8 = Price(
             idPrice = 8,
             idGasStation = 8,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 8.0,
+            alcoholPrice = 8.0,
+            dieselPrice = 8.0,
             lastUpdateDate = Date(20210503)
         )
         val price9 = Price(
             idPrice = 9,
             idGasStation = 9,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 9.0,
+            alcoholPrice = 9.0,
+            dieselPrice = 9.0,
             lastUpdateDate = Date(20210503)
         )
         val price10 = Price(
             idPrice = 10,
             idGasStation = 10,
-            gasolinePrice = 1.0,
-            alcoholPrice = 1.0,
-            dieselPrice = 1.0,
+            gasolinePrice = 10.0,
+            alcoholPrice = 10.0,
+            dieselPrice = 10.0,
             lastUpdateDate = Date(20210503)
         )
 
@@ -303,7 +302,7 @@ class MainActivity : AppCompatActivity() {
             idService = 1,
             idGasStation = 1,
             hasConvenienceStore = true,
-            hasCarWash = false,
+            hasCarWash = true,
             hasCalibrator = false,
             hasOilChange = false,
             hasTireShop = false,
@@ -410,6 +409,68 @@ class MainActivity : AppCompatActivity() {
             hasMechanical = true
         )
 
+        val user1 = User(
+            idUser = 1,
+            email = "a",
+            password = "a",
+            name = "Usuário Um",
+            birthDate = "31/02/99"
+        )
+        val user2 = User(
+            idUser = 2,
+            email = "a",
+            password = "a",
+            name = "Usuário Dois",
+            birthDate = "31/02/99"
+        )
+        val user3 = User(
+            idUser = 3,
+            email = "a",
+            password = "a",
+            name = "Usuário Três",
+            birthDate = "31/02/99"
+        )
+
+        val rating1 = Rating(
+            idRating = 1,
+            idGasStation = 1,
+            idUser = 1,
+            generalScore = 4.0,
+            attendanceScore = 4.0,
+            qualityScore = 4.0,
+            waitingTimeScore = 4.0,
+            serviceScore = 4.0,
+            safetyScore = 4.0,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating2 = Rating(
+            idRating = 2,
+            idGasStation = 1,
+            idUser = 2,
+            generalScore = 5.0,
+            attendanceScore = 5.0,
+            qualityScore = 5.0,
+            waitingTimeScore = 5.0,
+            serviceScore = 5.0,
+            safetyScore = 5.0,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+        val rating3 = Rating(
+            idRating = 3,
+            idGasStation = 1,
+            idUser = 3,
+            generalScore = 4.6,
+            attendanceScore = 5.0,
+            qualityScore = 4.9,
+            waitingTimeScore = 2.9,
+            serviceScore = 4.3,
+            safetyScore = 2.3,
+            commentary = "Lorem ipsum dolor sit amet. Quo aspernatur incidunt ut dignissimos galisum et culpa galisum At dolorem quasi est consequuntur quidem. Ad ullam sint ea quasi quia nam sapiente nesciunt et laudantium iusto. Aut aliquid fuga qui velit ipsum qui nemo nisi sit minus voluptatem cum maiores exercitationem et earum labore qui magnam itaque.",
+            date = Date(20211010)
+        )
+
         CoroutineScope(Dispatchers.IO).launch {
             gasStationDao.setGasStation(gasStation1)
             gasStationDao.setGasStation(gasStation2)
@@ -454,6 +515,14 @@ class MainActivity : AppCompatActivity() {
             serviceDao.save(service8)
             serviceDao.save(service9)
             serviceDao.save(service10)
+
+            userDao.save(user1)
+            userDao.save(user2)
+            userDao.save(user3)
+
+            ratingDao.save(rating1)
+            ratingDao.save(rating2)
+            ratingDao.save(rating3)
         }
     }
 }

@@ -2,20 +2,31 @@ package com.example.preconoposto.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.navigation.fragment.findNavController
 import com.example.preconoposto.data.User
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
+import com.example.preconoposto.database.dataStore
+import com.example.preconoposto.database.loggedUserIdPreference
 import com.example.preconoposto.databinding.FragmentLoginBinding
 import com.example.preconoposto.domain.UserAccessImpl
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -62,9 +73,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        loginViewModel.isLoginCorrect.observe(viewLifecycleOwner) { isLoginCorrect ->
-            if (isLoginCorrect)
-                findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
+        loginViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
+            if (loggedUser != null){
+                goToHomePage()
+            }
             else
                 Toast.makeText(
                     this.requireContext(),
@@ -72,6 +84,16 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
         }
+    }
+
+    private fun goToHomePage() {
+        CoroutineScope(Dispatchers.IO).launch {
+            requireContext().dataStore.edit { preferences ->
+                preferences[loggedUserIdPreference] =
+                    loginViewModel.loggedUser.value?.idUser.toString()
+            }
+        }
+        findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
     }
 
     private fun setupListeners() {

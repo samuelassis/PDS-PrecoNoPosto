@@ -4,9 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
+import com.example.preconoposto.database.dataStore
+import com.example.preconoposto.database.loggedUserIdPreference
 import com.example.preconoposto.domain.GasStationFiltersImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
@@ -25,6 +28,8 @@ class HomeViewModel : ViewModel() {
 
     private var _gasStationsFilteredSetAux:
             MutableSet<GasStationAndAddressAndPriceAndService> = mutableSetOf()
+
+    var aux = listOf<GasStationAndAddressAndPriceAndService?>()
 
     lateinit var gasStationFilter: GasStationFiltersImpl
 
@@ -45,71 +50,78 @@ class HomeViewModel : ViewModel() {
 
     fun getAllGasStationsThatHaveConvenienceStore(){
         gasStationsCompleteList.value?.let {
-            _gasStationsFilteredSetAux += gasStationFilter
-                .getAllGasStationsThatHaveConvenienceStore(it)
+            _gasStationsFilteredSetAux = gasStationFilter
+                .getAllGasStationsThatHaveConvenienceStore(aux)
                 .filterNotNull()
                 .toMutableSet()
         }
+        aux = _gasStationsFilteredSetAux.toList()
     }
 
     fun getAllGasStationsThatHaveCarWash(){
         gasStationsCompleteList.value?.let {
-            _gasStationsFilteredSetAux +=
+            _gasStationsFilteredSetAux =
                 gasStationFilter
-                    .getAllGasStationsThatHaveCarWash(it)
+                    .getAllGasStationsThatHaveCarWash(aux)
                     .filterNotNull()
                     .toMutableSet()
         }
+        aux = _gasStationsFilteredSetAux.toList()
     }
 
     fun getAllGasStationsThatHaveCalibrator(){
         gasStationsCompleteList.value?.let {
-            _gasStationsFilteredSetAux +=
+            _gasStationsFilteredSetAux =
                 gasStationFilter
-                    .getAllGasStationsThatHaveCalibrator(it)
+                    .getAllGasStationsThatHaveCalibrator(aux)
                     .filterNotNull()
                     .toMutableSet()
         }
+        aux = _gasStationsFilteredSetAux.toList()
     }
 
     fun getAllGasStationsThatHaveOilChange(){
         gasStationsCompleteList.value?.let {
-            _gasStationsFilteredSetAux +=
+            _gasStationsFilteredSetAux =
                 gasStationFilter
-                    .getAllGasStationsThatHaveOilChange(it)
+                    .getAllGasStationsThatHaveOilChange(aux)
                     .filterNotNull()
                     .toMutableSet()
         }
+        aux = _gasStationsFilteredSetAux.toList()
     }
 
     fun getAllGasStationsThatHaveTireShop(){
         gasStationsCompleteList.value?.let {
-            _gasStationsFilteredSetAux +=
+            _gasStationsFilteredSetAux =
                 gasStationFilter
-                    .getAllGasStationsThatHaveTireShop(it)
+                    .getAllGasStationsThatHaveTireShop(aux)
                     .filterNotNull()
                     .toMutableSet()
         }
+        aux = _gasStationsFilteredSetAux.toList()
     }
 
     fun getAllGasStationsThatHaveRestaurant(){
         gasStationsCompleteList.value?.let {
-            _gasStationsFilteredSetAux +=
+            _gasStationsFilteredSetAux =
                 gasStationFilter
-                    .getAllGasStationsThatHaveRestaurant(it)
+                    .getAllGasStationsThatHaveRestaurant(aux)
                     .filterNotNull()
                     .toMutableSet()
         }
+        aux = _gasStationsFilteredSetAux.toList()
     }
 
     fun getAllGasStationsThatHaveMechanical(){
         gasStationsCompleteList.value?.let {
-            _gasStationsFilteredSetAux +=
+            _gasStationsFilteredSetAux =
                 gasStationFilter
-                    .getAllGasStationsThatHaveMechanical(it)
+                    .getAllGasStationsThatHaveMechanical(aux)
                     .filterNotNull()
                     .toMutableSet()
         }
+        aux = _gasStationsFilteredSetAux.toList()
     }
 
     fun getAllGasStationsOrderedByGasPrice(){
@@ -143,11 +155,17 @@ class HomeViewModel : ViewModel() {
                 val favoriteGasStationIds = userFavorites?.favorites?.map {
                     it.favorite.idGasStation
                 }
-                val gasStationsCompleteListAux = favoriteGasStationIds?.map {
+                val aux = favoriteGasStationIds?.map {
                     gasStationFilter.getGasStationsAndAddressAndPriceAndService(it)
-                } ?: listOf()
+                }
+                aux?.forEach { gasStation ->
+                    gasStation?.let {
+                        _gasStationsFilteredSetAux += mutableSetOf(gasStation)
+                    }
 
-                _gasStationsCompleteList.postValue(gasStationsCompleteListAux)
+                }
+
+                setFilteredList()
             }
         }
     }

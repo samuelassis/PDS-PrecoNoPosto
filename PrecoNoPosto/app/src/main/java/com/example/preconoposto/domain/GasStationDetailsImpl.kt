@@ -1,22 +1,25 @@
 package com.example.preconoposto.domain
 
+import com.example.preconoposto.data.Favorite
 import com.example.preconoposto.data.GasStation
 import com.example.preconoposto.data.Price
 import com.example.preconoposto.data.relations.GasStationAndPrice
 import com.example.preconoposto.data.relations.GasStationWithRatingsAndUser
 import com.example.preconoposto.data.relations.RatingAndUser
+import com.example.preconoposto.repository.FavoriteRepository
 import com.example.preconoposto.repository.GasStationRepository
 
 class GasStationDetailsImpl(
-    private val repository: GasStationRepository
+    private val favoriteRepository: FavoriteRepository,
+    private val gasStationRepository: GasStationRepository
 ) : GasStationDetails {
 
     override suspend fun getGasStationWithRatingsAndUser(id: Long): GasStationWithRatingsAndUser {
-        return repository.getGasStationWithRatingsAndUser(id)
+        return gasStationRepository.getGasStationWithRatingsAndUser(id)
     }
 
     override suspend fun getGasStationAndPrice(id: Long): GasStationAndPrice {
-        return repository.getGasStationAndPrice(id)
+        return gasStationRepository.getGasStationAndPrice(id)
     }
 
     override suspend fun getScoreAverageTexts(id: Long): Map<String, String> {
@@ -96,6 +99,15 @@ class GasStationDetailsImpl(
             String.format("%.3f", price.dieselPrice)+"/L",
             price.lastUpdateDate.toString()
         )
+    }
+
+    override suspend fun saveFavorite(favorite: Favorite) {
+        favoriteRepository.save(favorite)
+    }
+
+    override suspend fun deleteFavorite(userId: Long, gasStationId: Long) {
+        val favorite = favoriteRepository.getFavoriteByUserIdAndGasStationId(userId, gasStationId)
+        favoriteRepository.delete(favorite)
     }
 
 }

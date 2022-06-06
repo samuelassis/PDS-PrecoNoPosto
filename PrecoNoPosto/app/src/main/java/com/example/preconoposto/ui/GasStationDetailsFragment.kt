@@ -7,12 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.preconoposto.R
+import com.example.preconoposto.data.Favorite
 import com.example.preconoposto.database.AppDatabase
+import com.example.preconoposto.database.dataStore
+import com.example.preconoposto.database.loggedUserIdPreference
 import com.example.preconoposto.domain.GasStationDetailsImpl
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class GasStationDetailsFragment : Fragment() {
 
@@ -21,6 +29,7 @@ class GasStationDetailsFragment : Fragment() {
     }
 
     val gasStationId : Long = 1
+    private var userId: Long = 1
 
     private lateinit var gasStationName: TextView
     private lateinit var attendanceScore: TextView
@@ -36,6 +45,7 @@ class GasStationDetailsFragment : Fragment() {
     private lateinit var dieselPriceUpdateDate: TextView
     private lateinit var generalScore: TextView
 
+    private lateinit var favoriteToggle: ToggleButton
     private lateinit var gasStationDetailsGasolineUpdateMb: MaterialButton
     private lateinit var gasStationDetailsAlcoholUpdateMb: MaterialButton
     private lateinit var gasStationDetailsDieselUpdateMb: MaterialButton
@@ -44,21 +54,30 @@ class GasStationDetailsFragment : Fragment() {
     private lateinit var gasStationDetailsAdapter: GasStationDetailsAdapter
 
     private lateinit var viewModel: GasStationDetailsViewModel
+
     private val gasStationDao by lazy {
         AppDatabase.getInstance(this.requireContext()).gasStationDao
+    }
+    private val favoriteDao by lazy {
+        AppDatabase.getInstance(this.requireContext()).favoriteDao
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        CoroutineScope(Dispatchers.IO).launch {
+            activity?.dataStore?.data?.map {
+                userId = it[loggedUserIdPreference]?.toLong() ?: 1
+            }
+        }
         return inflater.inflate(R.layout.fragment_gas_station_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[GasStationDetailsViewModel::class.java]
-        viewModel.gasStationDetailsImpl = GasStationDetailsImpl(gasStationDao)
+        viewModel.gasStationDetailsImpl = GasStationDetailsImpl(favoriteDao, gasStationDao)
 
         gasStationName = view.findViewById(R.id.gasStationDetailsGasStationNameTv)
 
@@ -76,6 +95,7 @@ class GasStationDetailsFragment : Fragment() {
         dieselPrice = view.findViewById(R.id.gasStationDetailsDieselPriceTv)
         dieselPriceUpdateDate = view.findViewById(R.id.gasStationDetailsDieselUpdatedDateTv)
 
+        favoriteToggle = view.findViewById(R.id.gasStationDetailsFavoriteTb)
         gasStationDetailsGasolineUpdateMb = view.findViewById(R.id.gasStationDetailsGasolineUpdateMb)
         gasStationDetailsAlcoholUpdateMb = view.findViewById(R.id.gasStationDetailsAlcoholUpdateMb)
         gasStationDetailsDieselUpdateMb = view.findViewById(R.id.gasStationDetailsDieselUpdateMb)
@@ -95,6 +115,15 @@ class GasStationDetailsFragment : Fragment() {
         }
         gasStationDetailsGasolineUpdateMb.setOnClickListener {
 
+        }
+
+        favoriteToggle.setOnClickListener{
+            if(favoriteToggle.isChecked) {
+                viewModel.saveFavorite(Favorite(idUser = userId, idGasStation = gasStationId))
+            }
+            else {
+                viewModel.deleteFavorite(userId, gasStationId)
+            }
         }
     }
 

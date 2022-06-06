@@ -10,14 +10,14 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel() : ViewModel() {
 
-    val isLoginCorrect: MutableLiveData<Boolean> = MutableLiveData()
+    val loggedUser: MutableLiveData<User?> = MutableLiveData()
 
     lateinit var userAccessImpl: UserAccessImpl
 
     fun login(user: User) {
         CoroutineScope(Dispatchers.IO).launch {
-            if(userAccessImpl.login(user) != null) isLoginCorrect.postValue(true)
-            else isLoginCorrect.postValue(false)
+            val loggedUserAttempt = userAccessImpl.login(user)
+            loggedUser.postValue(loggedUserAttempt)
         }
     }
 }

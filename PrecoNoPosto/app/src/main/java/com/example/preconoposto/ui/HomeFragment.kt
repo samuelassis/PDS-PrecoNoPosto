@@ -14,22 +14,33 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.ToggleButton
+import androidx.datastore.dataStore
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.map
 import com.example.preconoposto.R
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.database.AppDatabase
+import com.example.preconoposto.database.dataStore
+import com.example.preconoposto.database.loggedUserIdPreference
 import com.example.preconoposto.databinding.FragmentHomeBinding
 import com.example.preconoposto.domain.GasStationFiltersImpl
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    private val userId: Long = 1
+    private var userId = 100L
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
@@ -54,6 +65,9 @@ class HomeFragment : Fragment() {
     private val userDao by lazy {
         AppDatabase.getInstance(this.requireContext()).userDao
     }
+    private val favoriteDao by lazy {
+        AppDatabase.getInstance(this.requireContext()).favoriteDao
+    }
     private val geocoder by lazy {
         Geocoder(this.requireContext())
     }
@@ -64,13 +78,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-        viewModel.gasStationFilter = GasStationFiltersImpl(userDao, gasStationDao)
+        viewModel.gasStationFilter = GasStationFiltersImpl(userDao, favoriteDao, gasStationDao)
         binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        CoroutineScope(Dispatchers.IO).launch {
+            requireContext().dataStore.data.collect {
+                userId = it[loggedUserIdPreference]?.toLong() ?: 0L
+            }
+        }
         setupViews(view)
         setupMap()
         setupListeners()
@@ -177,40 +196,36 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkTogglesAndUpdateGasStationFilteredList(){
+        Log.i("preference", userId.toString())
+        viewModel.aux = viewModel.gasStationsCompleteList.value ?: listOf()
+
         var noneIsChecked = true
 
         if(hasConvenienceStore.isChecked){
-            Log.i("Checked", "hasConvenienceStore")
             viewModel.getAllGasStationsThatHaveConvenienceStore()
             noneIsChecked = false
         }
         if(hasCarWash.isChecked) {
-            Log.i("Checked", "hasCarWash")
             viewModel.getAllGasStationsThatHaveCarWash()
             noneIsChecked = false
         }
         if(hasCalibrator.isChecked) {
-            Log.i("Checked", "hasCalibrator")
             viewModel.getAllGasStationsThatHaveCalibrator()
             noneIsChecked = false
         }
         if(hasOilChange.isChecked) {
-            Log.i("Checked", "hasOilChange")
             viewModel.getAllGasStationsThatHaveOilChange()
             noneIsChecked = false
         }
         if(hasTireShop.isChecked) {
-            Log.i("Checked", "hasTireShop")
             viewModel.getAllGasStationsThatHaveTireShop()
             noneIsChecked = false
         }
         if(hasRestaurant.isChecked) {
-            Log.i("Checked", "hasRestaurant")
             viewModel.getAllGasStationsThatHaveRestaurant()
             noneIsChecked = false
         }
         if(hasMechanical.isChecked) {
-            Log.i("Checked", "hasMechanical")
             viewModel.getAllGasStationsThatHaveMechanical()
             noneIsChecked = false
         }
@@ -250,7 +265,7 @@ class HomeFragment : Fragment() {
                             item.price.gasolinePrice,
                             item.price.alcoholPrice,
                             item.price.dieselPrice)
-                        )
+                        ).icon(BitmapDescriptorFactory.defaultMarker(30F))
                         .position(itemLatLng)
                 )
                 marker?.tag = item.gasStation.idGasStation
