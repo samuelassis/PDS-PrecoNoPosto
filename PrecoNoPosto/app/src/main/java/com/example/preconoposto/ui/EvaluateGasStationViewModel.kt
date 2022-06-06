@@ -12,10 +12,10 @@ class EvaluateGasStationViewModel : ViewModel() {
 
     lateinit var gasStationRatingImpl: GasStationRatingImpl
 
-    var scoresAreValid: MutableLiveData<Boolean> =  MutableLiveData()
+    var scoresAreValid: MutableLiveData<Boolean> = MutableLiveData()
 
     fun saveRating(rating: Rating) {
-        if(
+        if (
             rating.generalScore > 5 ||
             rating.attendanceScore > 5 ||
             rating.qualityScore > 5 ||
