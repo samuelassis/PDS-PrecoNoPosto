@@ -18,5 +18,7 @@ interface GasStationRepository {
 
     suspend fun getGasStationAndPrice(id: Long): GasStationAndPrice
 
+    suspend fun getAllGasStationAndPrice(): List<GasStationAndPrice>
+
     suspend fun getGasStationsAndAddressAndPriceAndService(id: Long): GasStationAndAddressAndPriceAndService?
 }

@@ -11,26 +11,36 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.ToggleButton
+import android.widget.*
+import androidx.datastore.dataStore
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.lifecycle.map
 import com.example.preconoposto.R
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.database.AppDatabase
+import com.example.preconoposto.database.dataStore
+import com.example.preconoposto.database.loggedUserIdPreference
 import com.example.preconoposto.databinding.FragmentHomeBinding
 import com.example.preconoposto.domain.GasStationFiltersImpl
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    private val userId: Long = 1
+    private var userId = 100L
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
@@ -43,17 +53,17 @@ class HomeFragment : Fragment() {
     private lateinit var hasTireShop: ToggleButton
     private lateinit var hasRestaurant: ToggleButton
     private lateinit var hasMechanical: ToggleButton
-
-    /*private lateinit var favorites: MaterialButton
-    private lateinit var orderByGasPrice: MaterialButton
-    private lateinit var orderByAlcoholPrice: MaterialButton
-    private lateinit var orderByDieselPrice: MaterialButton*/
+    private lateinit var searchLocation: ImageButton
+    private lateinit var searchAddress: TextInputEditText
 
     private val gasStationDao by lazy {
         AppDatabase.getInstance(this.requireContext()).gasStationDao
     }
     private val userDao by lazy {
         AppDatabase.getInstance(this.requireContext()).userDao
+    }
+    private val favoriteDao by lazy {
+        AppDatabase.getInstance(this.requireContext()).favoriteDao
     }
     private val geocoder by lazy {
         Geocoder(this.requireContext())
@@ -65,13 +75,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-        viewModel.gasStationFilter = GasStationFiltersImpl(userDao, gasStationDao)
+        viewModel.gasStationFilter = GasStationFiltersImpl(userDao, favoriteDao, gasStationDao)
         binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        CoroutineScope(Dispatchers.IO).launch {
+            requireContext().dataStore.data.collect {
+                userId = it[loggedUserIdPreference]?.toLong() ?: 0L
+            }
+        }
         setupViews(view)
         setupMap(view)
         setupListeners()
@@ -89,10 +104,13 @@ class HomeFragment : Fragment() {
         hasTireShop = view.findViewById(R.id.homeHasTireShopTb)
         hasRestaurant = view.findViewById(R.id.homeHasRestaurantTb)
         hasMechanical = view.findViewById(R.id.homeHasMechanicalTb)
+        searchLocation = view.findViewById(R.id.homeChoseLocaleImageButton)
+        searchAddress = view.findViewById(R.id.homeSearchLocationTiet)
     }
 
     private fun setupMap(view: View){
         supportMapFragment.getMapAsync { googleMap ->
+            val icex = LatLng(-19.8688170307, -43.96438268)
 
             googleMap.setInfoWindowAdapter(object: GoogleMap.InfoWindowAdapter {
                 override fun getInfoContents(p0: Marker): View {
@@ -120,8 +138,7 @@ class HomeFragment : Fragment() {
                 }
             })
 
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                LatLng(-19.8688170307, -43.96438268), 14F)
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(icex, 13.5F)
             )
 
             viewModel.gasStationsCompleteList.observe(viewLifecycleOwner){
@@ -131,6 +148,16 @@ class HomeFragment : Fragment() {
             viewModel.gasStationsFilteredSet.observe(viewLifecycleOwner){
                 googleMap.clear()
                 updateMapMarkers(it.toList(), googleMap)
+            }
+            searchLocation.setOnClickListener {
+                val search = searchAddress.text.toString()
+                val address = geocoder.getFromLocationName(search, 1)
+                val latlng = address?.let {
+                    LatLng(it[0].latitude, it[0].longitude)
+                }
+                latlng?.let {
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 13F))
+                } ?: googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(icex, 13F))
             }
 
             googleMap.setOnInfoWindowClickListener {
@@ -181,42 +208,86 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkTogglesAndUpdateGasStationFilteredList(){
+        Log.i("preference", userId.toString())
+        viewModel.aux = viewModel.gasStationsCompleteList.value ?: listOf()
+
         var noneIsChecked = true
 
         if(hasConvenienceStore.isChecked){
-            Log.i("Checked", "hasConvenienceStore")
+            hasConvenienceStore.setTextColor(resources.getColor(R.color.white))
+            hasConvenienceStore.setBackgroundColor(resources.getColor(R.color.orange_dark))
             viewModel.getAllGasStationsThatHaveConvenienceStore()
             noneIsChecked = false
         }
+        else {
+            hasConvenienceStore.setTextColor(resources.getColor(R.color.black))
+            hasConvenienceStore.setBackgroundColor(resources.getColor(R.color.white))
+        }
+
         if(hasCarWash.isChecked) {
-            Log.i("Checked", "hasCarWash")
+            hasCarWash.setTextColor(resources.getColor(R.color.white))
+            hasCarWash.setBackgroundColor(resources.getColor(R.color.orange_dark))
             viewModel.getAllGasStationsThatHaveCarWash()
             noneIsChecked = false
         }
+        else {
+            hasCarWash.setTextColor(resources.getColor(R.color.black))
+            hasCarWash.setBackgroundColor(resources.getColor(R.color.white))
+        }
+
         if(hasCalibrator.isChecked) {
-            Log.i("Checked", "hasCalibrator")
+            hasCalibrator.setTextColor(resources.getColor(R.color.white))
+            hasCalibrator.setBackgroundColor(resources.getColor(R.color.orange_dark))
             viewModel.getAllGasStationsThatHaveCalibrator()
             noneIsChecked = false
         }
+        else {
+            hasCalibrator.setTextColor(resources.getColor(R.color.black))
+            hasCalibrator.setBackgroundColor(resources.getColor(R.color.white))
+        }
+
         if(hasOilChange.isChecked) {
-            Log.i("Checked", "hasOilChange")
+            hasOilChange.setTextColor(resources.getColor(R.color.white))
+            hasOilChange.setBackgroundColor(resources.getColor(R.color.orange_dark))
             viewModel.getAllGasStationsThatHaveOilChange()
             noneIsChecked = false
         }
+        else {
+            hasOilChange.setTextColor(resources.getColor(R.color.black))
+            hasOilChange.setBackgroundColor(resources.getColor(R.color.white))
+        }
+
         if(hasTireShop.isChecked) {
-            Log.i("Checked", "hasTireShop")
+            hasTireShop.setTextColor(resources.getColor(R.color.white))
+            hasTireShop.setBackgroundColor(resources.getColor(R.color.orange_dark))
             viewModel.getAllGasStationsThatHaveTireShop()
             noneIsChecked = false
         }
+        else {
+            hasTireShop.setTextColor(resources.getColor(R.color.black))
+            hasTireShop.setBackgroundColor(resources.getColor(R.color.white))
+        }
+
         if(hasRestaurant.isChecked) {
-            Log.i("Checked", "hasRestaurant")
+            hasRestaurant.setTextColor(resources.getColor(R.color.white))
+            hasRestaurant.setBackgroundColor(resources.getColor(R.color.orange_dark))
             viewModel.getAllGasStationsThatHaveRestaurant()
             noneIsChecked = false
         }
+        else {
+            hasRestaurant.setTextColor(resources.getColor(R.color.black))
+            hasRestaurant.setBackgroundColor(resources.getColor(R.color.white))
+        }
+
         if(hasMechanical.isChecked) {
-            Log.i("Checked", "hasMechanical")
+            hasMechanical.setTextColor(resources.getColor(R.color.white))
+            hasMechanical.setBackgroundColor(resources.getColor(R.color.orange_dark))
             viewModel.getAllGasStationsThatHaveMechanical()
             noneIsChecked = false
+        }
+        else {
+            hasMechanical.setTextColor(resources.getColor(R.color.black))
+            hasMechanical.setBackgroundColor(resources.getColor(R.color.white))
         }
 
         if(noneIsChecked){
@@ -254,7 +325,7 @@ class HomeFragment : Fragment() {
                             item.price.gasolinePrice,
                             item.price.alcoholPrice,
                             item.price.dieselPrice)
-                        )
+                        ).icon(BitmapDescriptorFactory.defaultMarker(30F))
                         .position(itemLatLng)
                 )
                 marker?.tag = item.gasStation.idGasStation

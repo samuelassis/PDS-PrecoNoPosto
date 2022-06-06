@@ -1,14 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.GasStationsFragment">
+    tools:context=".ui.GasStationDetailsFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/gas_stations" />
+        android:id="@+id/gasStationsOderByTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ordernar por: "
+        android:layout_marginStart="@dimen/space_8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gasStationsOrderByGasPriceTb"
+        app:layout_constraintTop_toTopOf="@id/gasStationsOrderByGasPriceTb"
+        app:layout_constraintBottom_toBottomOf="@id/gasStationsOrderByGasPriceTb"/>
 
-</FrameLayout>
+    <ToggleButton
+        android:id="@+id/gasStationsOrderByGasPriceTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/space_8dp"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:textOff="@string/gasoline"
+        android:textOn="@string/gasoline"
+        android:textSize="11sp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/gasStationsOderByTextTv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gasStationsOrderByAlcoholPriceTb"/>
+
+    <ToggleButton
+        android:id="@+id/gasStationsOrderByAlcoholPriceTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="@string/alcohol"
+        android:textOn="@string/alcohol"
+        android:textSize="11sp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/gasStationsOrderByDieselTb"
+        app:layout_constraintStart_toEndOf="@id/gasStationsOrderByGasPriceTb"
+        app:layout_constraintTop_toTopOf="@+id/gasStationsOrderByGasPriceTb" />
+
+    <ToggleButton
+        android:id="@+id/gasStationsOrderByDieselTb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="@string/diesel"
+        android:textOn="@string/diesel"
+        android:textSize="11sp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gasStationsOrderByAlcoholPriceTb"
+        app:layout_constraintTop_toTopOf="@id/gasStationsOrderByGasPriceTb" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gasStationsListRv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gasStationsOrderByAlcoholPriceTb"
+        app:layout_constraintBottom_toTopOf="@id/aux2"
+        tools:listitem="@layout/res_gas_stations_list"/>
+
+    <TextView
+        android:id="@+id/aux2"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

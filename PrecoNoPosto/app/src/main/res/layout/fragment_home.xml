@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/loginEmailTiet"
+                android:id="@+id/homeSearchLocationTiet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/light_grey_text_background"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_horizontal"
             android:background="@null"
-            android:src="@drawable/ic_tune"
+            android:src="@android:drawable/ic_menu_search"
             app:layout_constraintBottom_toBottomOf="@+id/homeChoseLocaleTextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/homeChoseLocaleTextInputLayout"
@@ -52,11 +52,14 @@
             android:id="@+id/homeHasConvenienceStoreTb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/space_16dp"
+            android:layout_marginTop="@dimen/space_16dp"
             android:layout_marginStart="@dimen/margin_horizontal"
+            android:layout_marginBottom="@dimen/space_8dp"
             android:textOff="Loja de Conveniencia"
             android:textOn="Loja de Conveniencia"
             android:textSize="11sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/homeChoseLocaleTextInputLayout" />
 
@@ -68,6 +71,8 @@
             android:textOff="Lava Jato"
             android:textOn="Lava Jato"
             android:textSize="11sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/homeHasCalibratorTb"
             app:layout_constraintStart_toEndOf="@id/homeHasConvenienceStoreTb"
             app:layout_constraintTop_toBottomOf="@+id/homeChoseLocaleTextInputLayout" />
@@ -81,6 +86,8 @@
             android:textOff="Calibrador"
             android:textOn="Calibrador"
             android:textSize="11sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/homeHasCarWashTb"
             app:layout_constraintTop_toBottomOf="@+id/homeChoseLocaleTextInputLayout" />
@@ -93,6 +100,8 @@
             android:textOff="Troca de óleo"
             android:textOn="Troca de óleo"
             android:textSize="11sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/homeHasTireShopTb"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb" />
@@ -101,10 +110,11 @@
             android:id="@+id/homeHasTireShopTb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textOff="Borracharia"
             android:textOn="Borracharia"
             android:textSize="11sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/homeHasRestaurantTb"
             app:layout_constraintStart_toEndOf="@id/homeHasOilChangeTb"
             app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb" />
@@ -116,6 +126,8 @@
             android:textOff="Restaurante"
             android:textOn="Restaurante"
             android:textSize="11sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@id/homeHasMechanicalTb"
             app:layout_constraintStart_toEndOf="@id/homeHasTireShopTb"
             app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb" />
@@ -128,6 +140,8 @@
             android:textOff="Mecânico"
             android:textOn="Mecânico"
             android:textSize="11sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/homeHasRestaurantTb"
             app:layout_constraintTop_toBottomOf="@id/homeHasConvenienceStoreTb" />

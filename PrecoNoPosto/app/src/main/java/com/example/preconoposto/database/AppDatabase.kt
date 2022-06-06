@@ -19,7 +19,7 @@ import com.example.preconoposto.data.*
         Session::class,
         User::class
     ],
-    version = 10
+    version = 11
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
@@ -29,6 +29,7 @@ abstract class AppDatabase: RoomDatabase() {
     abstract val ratingDao: RatingDao
     abstract val addressDao: AddressDao
     abstract val serviceDao: ServiceDao
+    abstract val favoriteDao: FavoriteDao
 
     companion object{
         @Volatile

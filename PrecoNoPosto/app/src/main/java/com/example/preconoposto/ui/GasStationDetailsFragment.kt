@@ -11,11 +11,13 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
 import com.example.preconoposto.domain.GasStationDetailsImpl
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.imageview.ShapeableImageView
 
 class GasStationDetailsFragment : Fragment() {
 
@@ -36,6 +38,7 @@ class GasStationDetailsFragment : Fragment() {
     private lateinit var dieselPrice: TextView
     private lateinit var dieselPriceUpdateDate: TextView
     private lateinit var generalScore: TextView
+    private lateinit var gasStationDetailsAvatarSiv: ShapeableImageView
 
     private lateinit var gasStationDetailsGasolineUpdateMb: MaterialButton
     private lateinit var gasStationDetailsAlcoholUpdateMb: MaterialButton
@@ -49,6 +52,9 @@ class GasStationDetailsFragment : Fragment() {
     private lateinit var viewModel: GasStationDetailsViewModel
     private val gasStationDao by lazy {
         AppDatabase.getInstance(this.requireContext()).gasStationDao
+    }
+    private val favoriteDao by lazy{
+        AppDatabase.getInstance(this.requireContext()).favoriteDao
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,10 +72,11 @@ class GasStationDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[GasStationDetailsViewModel::class.java]
-        viewModel.gasStationDetailsImpl = GasStationDetailsImpl(gasStationDao)
+        viewModel.gasStationDetailsImpl = GasStationDetailsImpl(favoriteDao, gasStationDao)
 
         gasStationToolBar = view.findViewById(R.id.gasStationsDetailsToolbar)
 
+        gasStationDetailsAvatarSiv = view.findViewById(R.id.gasStationDetailsAvatarSiv)
         generalScore = view.findViewById(R.id.gasStationDetailsGeneralScoreTv)
         attendanceScore = view.findViewById(R.id.gasStationDetailsAttendanceScoreTv)
         qualityScore = view.findViewById(R.id.gasStationDetailsQualityScoreTv)
@@ -93,6 +100,7 @@ class GasStationDetailsFragment : Fragment() {
 
         userCommentsRecycleView = view.findViewById(R.id.gasStationDetailsCommentsRv)
 
+        Glide.with(this).load("https://site.zuldigital.com.br/blog/wp-content/uploads/2020/09/shutterstock_339529217_Easy-Resize.com_.jpg").into(gasStationDetailsAvatarSiv)
         setupListeners(view)
         setupObservers(view)
     }

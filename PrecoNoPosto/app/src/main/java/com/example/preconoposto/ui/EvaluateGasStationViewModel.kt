@@ -23,9 +23,11 @@ class EvaluateGasStationViewModel : ViewModel() {
             rating.serviceScore > 5 ||
             rating.safetyScore > 5
         ) scoresAreValid.postValue(false)
-        CoroutineScope(Dispatchers.Default).launch {
-            gasStationRatingImpl.save(rating)
-            scoresAreValid.postValue(true)
+        else{
+            CoroutineScope(Dispatchers.Default).launch {
+                gasStationRatingImpl.save(rating)
+                scoresAreValid.postValue(true)
+            }
         }
     }
 }
