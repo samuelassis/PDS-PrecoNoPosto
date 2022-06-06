@@ -6,39 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import com.example.preconoposto.R
+import androidx.navigation.fragment.navArgs
 import com.example.preconoposto.data.Rating
 import com.example.preconoposto.database.AppDatabase
 import com.example.preconoposto.databinding.FragmentEvaluateGasStationBinding
-import com.example.preconoposto.databinding.FragmentLoginBinding
 import com.example.preconoposto.domain.GasStationRatingImpl
-import com.example.preconoposto.domain.UserAccessImpl
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputEditText
 import java.sql.Date
-import java.sql.Timestamp
-import kotlin.math.roundToLong
 
 class EvaluateGasStationFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = EvaluateGasStationFragment()
-    }
-
-    var gasStationId: Long = 1
     var userId: Long = 1
 
-    private lateinit var generalScore: EditText
-    private lateinit var attendanceScore: EditText
-    private lateinit var qualityScore: EditText
-    private lateinit var waitingTimeScore: EditText
-    private lateinit var serviceScore: EditText
-    private lateinit var safetyScore: EditText
-    private lateinit var commentary: TextInputEditText
-    private lateinit var evaluateButton: MaterialButton
+    private val args: EvaluateGasStationFragmentArgs by navArgs()
 
     lateinit var binding: FragmentEvaluateGasStationBinding
 
@@ -61,20 +41,8 @@ class EvaluateGasStationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViews(view)
         setupObservers()
         setupListeners()
-    }
-
-    private fun setupViews(view: View) {
-        generalScore = view.findViewById(R.id.loginEnterButton)
-        attendanceScore = view.findViewById(R.id.evaluateGasStationAttendanceScoreEt)
-        qualityScore = view.findViewById(R.id.evaluateGasStationQualityScoreEt)
-        waitingTimeScore = view.findViewById(R.id.evaluateGasStationWaitingTimeScoreEt)
-        serviceScore = view.findViewById(R.id.evaluateGasStationServiceScoreEt)
-        safetyScore = view.findViewById(R.id.evaluateGasStationSafetyScoreEt)
-        commentary = view.findViewById(R.id.evaluateGasStationCommentTiet)
-        evaluateButton = view.findViewById(R.id.evaluateGasStationEvaluateMb)
     }
 
     private fun setupObservers(){
@@ -85,6 +53,7 @@ class EvaluateGasStationFragment : Fragment() {
                     "Comentário feito com sucesso",
                     Toast.LENGTH_SHORT
                 ).show()
+                requireActivity().onBackPressed()
             }
             else{
                 Toast.makeText(
@@ -97,19 +66,27 @@ class EvaluateGasStationFragment : Fragment() {
     }
 
     private fun setupListeners(){
-        evaluateButton.setOnClickListener {
+        binding.evaluateGasStationEvaluateMb.setOnClickListener {
             viewModel.saveRating(Rating(
-                idGasStation = gasStationId,
+                idGasStation = args.gasStationId,
                 idUser = userId,
-                generalScore = generalScore.text.toString().toDouble(),
-                attendanceScore = attendanceScore.text.toString().toDouble(),
-                qualityScore = qualityScore.text.toString().toDouble(),
-                waitingTimeScore = waitingTimeScore.text.toString().toDouble(),
-                serviceScore = serviceScore.text.toString().toDouble(),
-                safetyScore = safetyScore.text.toString().toDouble(),
-                commentary = commentary.text.toString(),
+                generalScore = setTextToDouble(binding.evaluateGasStationGeneralScoreEt.text.toString()),
+                attendanceScore = setTextToDouble(binding.evaluateGasStationAttendanceScoreEt.text.toString()),
+                qualityScore = setTextToDouble(binding.evaluateGasStationQualityScoreEt.text.toString()),
+                waitingTimeScore = setTextToDouble(binding.evaluateGasStationWaitingTimeScoreEt.text.toString()),
+                serviceScore = setTextToDouble(binding.evaluateGasStationServiceScoreEt.text.toString()),
+                safetyScore = setTextToDouble(binding.evaluateGasStationSafetyScoreEt.text.toString()),
+                commentary = binding.evaluateGasStationCommentTiet.text.toString(),
                 date = Date(System.currentTimeMillis())
             ))
+        }
+    }
+
+    private fun setTextToDouble(text: String): Double {
+        return if (text.isNullOrEmpty()) {
+            0.0
+        } else {
+            text.toDouble()
         }
     }
 

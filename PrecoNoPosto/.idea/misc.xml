@@ -28,6 +28,8 @@
         <entry key="app/src/main/res/layout/blank_fragment.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.3640625" />
         <entry key="app/src/main/res/layout/fragment_coordinator_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_evaluate_gas_station.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_gas_station_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_gas_stations.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home_bottom_sheet.xml" value="0.3640625" />

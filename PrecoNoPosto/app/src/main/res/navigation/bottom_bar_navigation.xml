@@ -9,7 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="com.example.preconoposto.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/fromHomeFragmentToGasStationDetailsFragment"
             app:destination="@id/gasStationDetailsFragment"
@@ -32,9 +32,22 @@
         android:id="@+id/gasStationDetailsFragment"
         android:name="com.example.preconoposto.ui.GasStationDetailsFragment"
         android:label="fragment_gas_station_details"
-        tools:layout="@layout/fragment_gas_station_details" >
+        tools:layout="@layout/fragment_gas_station_details">
+        <argument
+            android:name="gasStationId"
+            app:argType="long" />
+        <action
+            android:id="@+id/fromGasStationDetailsFragmentToEvaluateGasStationFragment"
+            app:destination="@id/evaluateGasStationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/evaluateGasStationFragment"
+        android:name="com.example.preconoposto.ui.EvaluateGasStationFragment"
+        android:label="fragment_evaluate_gas_station"
+        tools:layout="@layout/fragment_evaluate_gas_station">
         <argument
             android:name="gasStationId"
             app:argType="long" />
     </fragment>
+
 </navigation>

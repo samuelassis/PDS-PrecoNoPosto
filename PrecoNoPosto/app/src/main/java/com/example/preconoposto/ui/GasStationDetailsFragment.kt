@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,8 @@ class GasStationDetailsFragment : Fragment() {
     private lateinit var gasStationDetailsGasolineUpdateMb: MaterialButton
     private lateinit var gasStationDetailsAlcoholUpdateMb: MaterialButton
     private lateinit var gasStationDetailsDieselUpdateMb: MaterialButton
+
+    private lateinit var gasStationDetailsEvaluateMb: MaterialButton
 
     private lateinit var userCommentsRecycleView: RecyclerView
     private lateinit var gasStationDetailsAdapter: GasStationDetailsAdapter
@@ -86,6 +89,8 @@ class GasStationDetailsFragment : Fragment() {
         gasStationDetailsAlcoholUpdateMb = view.findViewById(R.id.gasStationDetailsAlcoholUpdateMb)
         gasStationDetailsDieselUpdateMb = view.findViewById(R.id.gasStationDetailsDieselUpdateMb)
 
+        gasStationDetailsEvaluateMb = view.findViewById(R.id.gasStationDetailsEvaluateMb)
+
         userCommentsRecycleView = view.findViewById(R.id.gasStationDetailsCommentsRv)
 
         setupListeners(view)
@@ -102,6 +107,11 @@ class GasStationDetailsFragment : Fragment() {
         gasStationDetailsGasolineUpdateMb.setOnClickListener {
 
         }
+        gasStationDetailsEvaluateMb.setOnClickListener {
+            val action = GasStationDetailsFragmentDirections.fromGasStationDetailsFragmentToEvaluateGasStationFragment(gasStationId)
+            view.findNavController().navigate(action)
+        }
+
         gasStationToolBar.setOnClickListener {
             requireActivity().onBackPressed()
         }
