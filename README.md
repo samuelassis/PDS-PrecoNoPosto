@@ -24,7 +24,8 @@ https://www.figma.com/file/gTJ67Z6kA0It9GrKbPdkqQ/Pre%C3%A7o-no-Posto---PROD?nod
 ## Arquitetura Hexagonal
 
 ### Por que estamos adotando essa arquitetura?
-A aplicação de Arquitetura Hexagonal era um dos requisitos do projeto. Para que pudessemos aplicar de maneira prática os conhecimentos adquiridos na sala de aula, além disso a arquitetura nos proporciona maior facilidade para testar, possibilita a troca de tecnologias externas sem afetar a arquitetura. Para aplicar os conceitos de Arquitetura Hexagonal e DDD em nosso projeto tivemos que fazer algumas adaptações, pois a linguagem que escolhemos, Kotlin, já possui a arquitetura MVVM como padrão mas ainda sim foi possivel aplicar os conceitos.
+A aplicação de Arquitetura Hexagonal era um dos requisitos do projeto, para que pudessemos aplicar de maneira prática os conhecimentos adquiridos na sala de aula. Além disso, a arquitetura nos proporciona maior facilidade para testar e possibilita a troca de tecnologias externas sem afetar a arquitetura. Para aplicar os conceitos de Arquitetura Hexagonal e DDD em nosso projeto tivemos que fazer algumas adaptações, pois o android já possui uma arquitetura própria como padrão, mas ainda sim foi possivel aplicar os conceitos.
+
 ### Portas e adaptadores
 
 #### Portas
@@ -61,6 +62,7 @@ Os adaptadores de saída são:
 
 ### Uso de conceitos de DDD na camada de domínio
 Na nossa camada de dominio utilizamos DDD na definição das Entidades do projeto, além disso nos preocupamos em aplicar Linguagem Ubiqua em todo o projeto no nome das Classes, Funções e Variaveis. Aplicamos tambem o uso de Repositórios para a implementação de algumas Classes de dominio, temos repositórios de Usuarios, Avaliações e Postos. Na imagem abaixo deixamos um diagrama demostrando as entidades e alguns objetos de valor.
+
 ### Entidades, objetos de valor, agregados, serviços, repositórios, etc.
 Entidades: Address, Favorite, GasStation, Price, Rating, Service e User.
 ![image](https://user-images.githubusercontent.com/49159226/172067832-17b194a2-4820-485d-a2a1-389c080ed1d3.png)
