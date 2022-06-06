@@ -46,10 +46,10 @@ O sistema, conta com 10 adaptadores, sendo 7 de entrada e 3 de saída.
 Os adaptadores de entrada são:
 - EvaluateGasStationViewModel: Adaptador responsável por administrar o estado da tela de avaliação de postos. Utiliza uma instância da classe de domínio GasStationRatingImpl. 
 - GasStationDetailsViewModel: Adaptador responsável por administrar o estado da tela de detalhes de postos. Utiliza uma instância da classe de domínio GasStationRatingImpl. 
-- GasStationsViewModel: // TODO
+- GasStationsViewModel: Adaptador responsável por administrar o estado da tela de lista de postos. Utiliza uma instância da classe de domínio GasStationDetailsImpl e uma instância da classe de domínio GasStationFiltersImpl.
 - HomeViewModel: Adaptador responsável por administrar o estado da tela de mapa dos postos e seus filtros. Utiliza uma instância da classe de domínio GasStationFiltersImpl. 
 - LoginViewModel: Adaptador responsável por administrar o estado da tela de login. Utiliza uma instância da classe de domínio UsarAccesImpl.
-- ProfileViewModel: // TODO
+- ProfileViewModel: (Ainda não implementado) 
 - SignUpViewModel: Adaptador responsável por administrar o estado da tela de cadastro. Utiliza uma instância da classe de domínio UsarAccesImpl.
 
 
