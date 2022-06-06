@@ -1,11 +1,15 @@
 package com.example.preconoposto.ui
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -53,7 +57,7 @@ class GasStationDetailsFragment : Fragment() {
     private val gasStationDao by lazy {
         AppDatabase.getInstance(this.requireContext()).gasStationDao
     }
-    private val favoriteDao by lazy{
+    private val favoriteDao by lazy {
         AppDatabase.getInstance(this.requireContext()).favoriteDao
     }
 
@@ -100,23 +104,27 @@ class GasStationDetailsFragment : Fragment() {
 
         userCommentsRecycleView = view.findViewById(R.id.gasStationDetailsCommentsRv)
 
-        Glide.with(this).load("https://site.zuldigital.com.br/blog/wp-content/uploads/2020/09/shutterstock_339529217_Easy-Resize.com_.jpg").into(gasStationDetailsAvatarSiv)
+        Glide.with(this)
+            .load("https://site.zuldigital.com.br/blog/wp-content/uploads/2020/09/shutterstock_339529217_Easy-Resize.com_.jpg")
+            .into(gasStationDetailsAvatarSiv)
         setupListeners(view)
         setupObservers(view)
     }
 
     private fun setupListeners(view: View) {
         gasStationDetailsGasolineUpdateMb.setOnClickListener {
-
+            showdialog("Gasolina")
         }
-        gasStationDetailsGasolineUpdateMb.setOnClickListener {
-
+        gasStationDetailsAlcoholUpdateMb.setOnClickListener {
+            showdialog("Alcool")
         }
-        gasStationDetailsGasolineUpdateMb.setOnClickListener {
-
+        gasStationDetailsDieselUpdateMb.setOnClickListener {
+            showdialog("Diesel")
         }
         gasStationDetailsEvaluateMb.setOnClickListener {
-            val action = GasStationDetailsFragmentDirections.fromGasStationDetailsFragmentToEvaluateGasStationFragment(gasStationId)
+            val action =
+                GasStationDetailsFragmentDirections.fromGasStationDetailsFragmentToEvaluateGasStationFragment(
+                    gasStationId)
             view.findNavController().navigate(action)
         }
 
@@ -156,5 +164,40 @@ class GasStationDetailsFragment : Fragment() {
                     userCommentsRecycleView.adapter = gasStationDetailsAdapter
                 }
             }
+
+        viewModel.priceGasoline.observe(viewLifecycleOwner) {
+            gasPrice.text = it
+            gasPriceUpdateDate.text = viewModel.getTodayDateTime()
+        }
+        viewModel.priceAlcohol.observe(viewLifecycleOwner) {
+            alcoholPrice.text = it
+            alcoholPriceUpdateDate.text = viewModel.getTodayDateTime()
+        }
+        viewModel.priceDiesel.observe(viewLifecycleOwner) {
+            dieselPrice.text = it
+            dieselPriceUpdateDate.text = viewModel.getTodayDateTime()
+        }
+    }
+
+    fun showdialog(item: String) {
+        val builder: AlertDialog.Builder = android.app.AlertDialog.Builder(requireContext())
+        builder.setTitle(item)
+
+    // Set up the input
+        val input = EditText(requireContext())
+    // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setHint("Insira o valor (R$/Litro)")
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        builder.setView(input)
+
+    // Set up the buttons
+        builder.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            // Here you get get input text from the Edittext
+            viewModel.setNewPrice(item, input.text.toString())
+        })
+        builder.setNegativeButton("Cancel",
+            DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+
+        builder.show()
     }
 }

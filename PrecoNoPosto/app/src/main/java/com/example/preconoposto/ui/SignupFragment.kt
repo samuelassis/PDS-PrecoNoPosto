@@ -60,14 +60,16 @@ class SignupFragment : Fragment() {
 
     private fun setupListeners() {
         viewModel.isSignupCorrect.observe(viewLifecycleOwner) {
-            if (it == true)
+            if (it == true) {
                 Log.i("login", "signup feito com sucesso")
-            else
+                requireActivity().onBackPressed()
+            }else {
                 Toast.makeText(
                     this.requireContext(),
                     "Erro: Todos os campos são obrigatórios",
                     Toast.LENGTH_SHORT
                 ).show()
+            }
         }
 
         signupConfirmButton.setOnClickListener {
