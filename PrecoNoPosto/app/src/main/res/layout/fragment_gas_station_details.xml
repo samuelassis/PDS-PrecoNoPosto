@@ -396,8 +396,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_8dp"
         android:text="@string/evaluate"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gasStationDetailsCommentsRv"
+        app:layout_constraintBottom_toTopOf="@id/aux"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/aux"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

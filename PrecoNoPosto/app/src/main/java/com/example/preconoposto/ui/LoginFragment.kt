@@ -95,7 +95,7 @@ class LoginFragment : Fragment() {
                     loginViewModel.loggedUser.value?.idUser.toString()
             }
         }
-        findNavController().navigate(R.id.fromLoginFragmentToHomeFragment)
+        startActivity(Intent(requireContext(), BottomNavigationActivity::class.java))
     }
 
     private fun setupListeners() {
