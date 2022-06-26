@@ -48,9 +48,9 @@ class GasStationDetailsViewModel : ViewModel() {
 
     fun setNewPrice(item: String, price: String) {
         when(item) {
-            "Gasolina" -> priceGasoline.value = "{$price}/L"
-            "Alcool" -> priceAlcohol.value = "{$price}/L"
-            "Diesel" -> priceDiesel.value = "{$price}/L"
+            "Gasolina" -> priceGasoline.value = "$price/L"
+            "Alcool" -> priceAlcohol.value = "$price/L"
+            "Diesel" -> priceDiesel.value = "$price/L"
         }
     }
 
