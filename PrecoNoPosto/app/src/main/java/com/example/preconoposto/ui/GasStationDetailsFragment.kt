@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
 import com.example.preconoposto.domain.GasStationDetailsImpl
+import com.example.preconoposto.ui.viewmodels.GasStationDetailsViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView

@@ -12,10 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.datastore.dataStore
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.lifecycle.map
 import com.example.preconoposto.R
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.database.AppDatabase
@@ -23,6 +21,7 @@ import com.example.preconoposto.database.dataStore
 import com.example.preconoposto.database.loggedUserIdPreference
 import com.example.preconoposto.databinding.FragmentHomeBinding
 import com.example.preconoposto.domain.GasStationFiltersImpl
+import com.example.preconoposto.ui.viewmodels.HomeViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -34,8 +33,6 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {

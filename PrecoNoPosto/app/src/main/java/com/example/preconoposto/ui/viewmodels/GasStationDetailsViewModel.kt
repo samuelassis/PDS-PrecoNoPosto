@@ -1,4 +1,4 @@
-package com.example.preconoposto.ui
+package com.example.preconoposto.ui.viewmodels
 
 import android.os.Build
 import androidx.annotation.RequiresApi

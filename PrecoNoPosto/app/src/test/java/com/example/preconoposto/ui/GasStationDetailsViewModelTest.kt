@@ -3,6 +3,7 @@ package com.example.preconoposto.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.preconoposto.domain.GasStationDetailsImpl
+import com.example.preconoposto.ui.viewmodels.GasStationDetailsViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.verify
