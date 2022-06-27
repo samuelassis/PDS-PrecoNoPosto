@@ -9,6 +9,7 @@ import com.example.preconoposto.data.User
 import com.example.preconoposto.data.relations.GasStationWithRatingsAndUser
 import com.example.preconoposto.data.relations.RatingAndUser
 import com.example.preconoposto.domain.GasStationDetailsImpl
+import com.example.preconoposto.ui.viewmodels.GasStationDetailsViewModel
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 import org.junit.Rule
