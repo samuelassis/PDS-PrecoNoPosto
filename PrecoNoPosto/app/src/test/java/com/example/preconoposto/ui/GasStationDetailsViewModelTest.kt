@@ -1,17 +1,31 @@
 package com.example.preconoposto.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.example.preconoposto.MainCoroutineRule
 import com.example.preconoposto.domain.GasStationDetailsImpl
-import com.example.preconoposto.ui.viewmodels.GasStationDetailsViewModel
-import io.mockk.MockKAnnotations
+import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.verify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.MainCoroutineDispatcher
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestWatcher
 import org.junit.rules.Timeout
+import org.junit.runner.Description
 import java.util.concurrent.TimeUnit
-
+import kotlin.system.measureTimeMillis
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 class GasStationDetailsViewModelTest {
 
     @get:Rule
@@ -25,6 +39,12 @@ class GasStationDetailsViewModelTest {
 
     @RelaxedMockK
     private lateinit var observerPrice: Observer<String>
+
+    @RelaxedMockK
+    private lateinit var observerAverage: Observer<Map<String,String>>
+
+    @get:Rule
+    val coroutineRule = MainCoroutineRule()
 
     init {
         MockKAnnotations.init(this)
@@ -90,11 +110,24 @@ class GasStationDetailsViewModelTest {
     @Test
     fun `when calling getScoreAverageTexts then should return score average from a specific gas station`() {
         // Mock
+        val expected = mapOf<String, String>("generalScore" to "5.0/5.0")
 
+        coEvery {
+            gasStationDetails.getScoreAverageTexts(1L)
+        } returns expected
 
         // Act
+        val gasStationDetailsViewModel = GasStationDetailsViewModel()
+        gasStationDetailsViewModel.gasStationDetailsImpl = gasStationDetails
+
+        gasStationDetailsViewModel.getScoreAverageTexts(1L).observeForever(
+            observerAverage
+        )
 
         // Assert
+        verify(exactly = 1) {
+            observerAverage.onChanged(expected)
+        }
 
     }
 }
