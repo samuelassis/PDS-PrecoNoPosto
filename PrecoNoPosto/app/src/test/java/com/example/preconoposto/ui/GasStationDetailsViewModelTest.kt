@@ -3,18 +3,29 @@ package com.example.preconoposto.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.example.preconoposto.MainCoroutineRule
 import com.example.preconoposto.domain.GasStationDetailsImpl
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.MainCoroutineDispatcher
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestWatcher
 import org.junit.rules.Timeout
+import org.junit.runner.Description
 import java.util.concurrent.TimeUnit
 import kotlin.system.measureTimeMillis
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-
 class GasStationDetailsViewModelTest {
 
     @get:Rule
@@ -31,6 +42,9 @@ class GasStationDetailsViewModelTest {
 
     @RelaxedMockK
     private lateinit var observerAverage: Observer<Map<String,String>>
+
+    @get:Rule
+    val coroutineRule = MainCoroutineRule()
 
     init {
         MockKAnnotations.init(this)
@@ -94,7 +108,7 @@ class GasStationDetailsViewModelTest {
     }
 
     @Test
-    fun `when calling getScoreAverageTexts then should return score average from a specific gas station`() = runBlocking {
+    fun `when calling getScoreAverageTexts then should return score average from a specific gas station`() {
         // Mock
         val expected = mapOf<String, String>("generalScore" to "5.0/5.0")
 
@@ -106,44 +120,14 @@ class GasStationDetailsViewModelTest {
         val gasStationDetailsViewModel = GasStationDetailsViewModel()
         gasStationDetailsViewModel.gasStationDetailsImpl = gasStationDetails
 
-            val tt = gasStationDetails.getScoreAverageTexts(1L)
-            val y = "y"
-        val z = tt.values
-        val aaa = "aaaaaaaaa"
-
-        val totalExecutionTime = measureTimeMillis {
-            val score = gasStationDetailsViewModel.getScoreAverageTexts(1L)
-            assertEquals(expected, score.value)
-        }
-
-        val mapp = mapOf<String, String>()
-
         gasStationDetailsViewModel.getScoreAverageTexts(1L).observeForever(
             observerAverage
         )
 
-        verify(exactly = 1) {
-            ass
-        }
-
-//        val b = gasStationDetailsViewModel.getScoreAverageTexts(1L)
-//        val c = "c"
-
-//        runBlocking {
-//            val b = gasStationDetailsViewModel.getScoreAverageTexts(1L)
-//            val x = b.value
-//            val a = gasStationDetailsViewModel.getScoreAverageTexts(1L)
-//        a.observeForever(observerAverage)
-//        }
-
-
-
-
-
-
-
-
         // Assert
+        verify(exactly = 1) {
+            observerAverage.onChanged(expected)
+        }
 
     }
 }
