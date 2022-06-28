@@ -45,7 +45,7 @@ class GasStationViewModelTest {
         MockKAnnotations.init(this)
     }
 
-    private   val gasStation1 = GasStation(
+    private val gasStation1 = GasStation(
         idGasStation = 1,
         idAddress = 1,
         idService = 1,
@@ -53,7 +53,7 @@ class GasStationViewModelTest {
         idPrice = 1,
         name = "Posto 1"
     )
-    private  val gasStation2 = GasStation(
+    private val gasStation2 = GasStation(
         idGasStation = 2,
         idAddress = 2,
         idService = 2,
