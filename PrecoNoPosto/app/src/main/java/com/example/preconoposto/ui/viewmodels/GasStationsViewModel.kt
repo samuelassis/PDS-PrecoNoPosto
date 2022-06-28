@@ -1,10 +1,9 @@
-package com.example.preconoposto.ui
+package com.example.preconoposto.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
 import com.example.preconoposto.data.relations.GasStationAndPrice
 import com.example.preconoposto.domain.GasStationDetailsImpl
 import com.example.preconoposto.domain.GasStationFiltersImpl

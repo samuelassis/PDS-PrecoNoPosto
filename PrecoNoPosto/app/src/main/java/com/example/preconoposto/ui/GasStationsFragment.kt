@@ -2,7 +2,6 @@ package com.example.preconoposto.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import com.example.preconoposto.R
 import com.example.preconoposto.database.AppDatabase
 import com.example.preconoposto.domain.GasStationDetailsImpl
 import com.example.preconoposto.domain.GasStationFiltersImpl
+import com.example.preconoposto.ui.viewmodels.GasStationsViewModel
 
 class GasStationsFragment : Fragment(R.layout.fragment_gas_stations) {
 
