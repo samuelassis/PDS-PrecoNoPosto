@@ -45,18 +45,6 @@ class GasStationDetailsTest {
     @RelaxedMockK
     lateinit var favoriteRepository: FavoriteRepository
 
-    @RelaxedMockK
-    private lateinit var observerPrice: Observer<String>
-
-    @RelaxedMockK
-    private lateinit var observerAverage: Observer<Map<String, String>>
-
-    @RelaxedMockK
-    private lateinit var observerGasStationWithRatingsAndUser: Observer<GasStationWithRatingsAndUser>
-
-    @RelaxedMockK
-    private lateinit var observerFuelsPrice: Observer<Map<String, String>>
-
     init {
         MockKAnnotations.init(this)
     }
@@ -161,5 +149,23 @@ class GasStationDetailsTest {
         assertEquals(getScoreAverageTexts, expected)
     }
 
+    @Test
+    fun `when calling getAllGasStationAndPrice then should return a list of GasStationAndPrice`() = runBlocking {
+        // Arrange
+        val mockGasStation = GasStation(1L, 1L, 1L, 1L, 1L, "Posto 1")
+        val mockPrice = Price(
+            1L, 1L, 6.099, 6.099, 6.099, Date(20210503)
+        )
+        val expected = listOf(GasStationAndPrice(mockPrice, mockGasStation))
+
+        // Mock
+        coEvery {
+            gasStationRepository.getAllGasStationAndPrice()
+        } returns expected
+
+        val gasStationDetails = GasStationDetailsImpl(favoriteRepository, gasStationRepository)
+
+        assertEquals(expected, gasStationDetails.getAllGasStationAndPrice())
+    }
 
 }
