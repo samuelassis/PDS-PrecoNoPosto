@@ -23,3 +23,7 @@ tasks.register("runUnityTests") { // 1
     group = "custom"      // 3
     description = "$ ./gradlew runUnityTests # runs on GitHub Action" //3
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.1'
+}
