@@ -1,8 +1,13 @@
 package com.example.preconoposto.ui
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.location.Geocoder
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.AsyncTask
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.preconoposto.R
 import com.example.preconoposto.data.relations.GasStationAndAddressAndPriceAndService
@@ -32,7 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -52,6 +58,7 @@ class HomeFragment : Fragment() {
     private lateinit var hasMechanical: ToggleButton
     private lateinit var searchLocation: ImageButton
     private lateinit var searchAddress: TextInputEditText
+    private lateinit var teste: TextInputEditText
 
     private val gasStationDao by lazy {
         AppDatabase.getInstance(this.requireContext()).gasStationDao
@@ -74,6 +81,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         viewModel.gasStationFilter = GasStationFiltersImpl(userDao, favoriteDao, gasStationDao)
         binding = FragmentHomeBinding.inflate(inflater)
+//        binding.homeProgressBarIcon.visibility = View.VISIBLE
         return binding.root
     }
 
@@ -85,10 +93,11 @@ class HomeFragment : Fragment() {
             }
         }
         setupViews(view)
-        setupMap(view)
         setupListeners()
         viewModel.getAllGasStationsAndAddressAndPriceAndService()
     }
+
+
 
     private fun setupViews(view: View){
         supportMapFragment =
@@ -103,9 +112,12 @@ class HomeFragment : Fragment() {
         hasMechanical = view.findViewById(R.id.homeHasMechanicalTb)
         searchLocation = view.findViewById(R.id.homeChoseLocaleImageButton)
         searchAddress = view.findViewById(R.id.homeSearchLocationTiet)
+
+        checkNetworkConnection()
+
     }
 
-    private fun setupMap(view: View){
+    private fun setupMap(){
         supportMapFragment.getMapAsync { googleMap ->
             val icex = LatLng(-19.8688170307, -43.96438268)
 
@@ -160,7 +172,7 @@ class HomeFragment : Fragment() {
             googleMap.setOnInfoWindowClickListener {
                 val gasStationId = it.tag.toString().toLong()
                 val action = HomeFragmentDirections.fromHomeFragmentToGasStationDetailsFragment(gasStationId)
-                view.findNavController().navigate(action)
+                view?.findNavController()?.navigate(action)
                 Log.i("Marker", it.tag.toString())
             }
 
@@ -188,6 +200,10 @@ class HomeFragment : Fragment() {
         }
         hasMechanical.setOnClickListener {
             checkTogglesAndUpdateGasStationFilteredList()
+        }
+
+        binding.homeNetworkTryAgainTv.setOnClickListener {
+            checkNetworkConnection()
         }
 
         /*favorites.setOnClickListener {
@@ -328,6 +344,45 @@ class HomeFragment : Fragment() {
                 marker?.tag = item.gasStation.idGasStation
             }
 
+        }
+    }
+
+    @SuppressLint("NewApi")
+    fun isOnline(context: Context?): Boolean {
+        context?.let {
+            val connectivityManager =
+                it.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            if (connectivityManager != null) {
+                val capabilities =
+                    connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                        return true
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                        return true
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                        return true
+                    }
+                }
+            }
+            return false
+        } ?: return false
+
+    }
+
+    private fun checkNetworkConnection() {
+        if (isOnline(context)) {
+            binding.homeGasStationMap.visibility = View.VISIBLE
+            binding.homeNetworkErrorTv.visibility = View.GONE
+            binding.homeNetworkTryAgainTv.visibility = View.GONE
+            setupMap()
+        } else {
+            binding.homeGasStationMap.visibility = View.GONE
+            binding.homeNetworkErrorTv.visibility = View.VISIBLE
+            binding.homeNetworkTryAgainTv.visibility = View.VISIBLE
         }
     }
 

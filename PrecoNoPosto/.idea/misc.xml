@@ -8,6 +8,10 @@
         <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/fragment_gas_stations.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/fragment_home.xml" value="0.29717180244829045" />
         <entry key="..\:/Users/Fabio/Documents/PDS-PrecoNoPosto/PrecoNoPosto/app/src/main/res/layout/fragment_login.xml" value="0.29717180244829045" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23385416666666667" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.3640625" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.2203125" />
+        <entry key="app/src/main/res/layout/loading_indicator.xml" value="0.23385416666666667" />
       </map>
     </option>
   </component>

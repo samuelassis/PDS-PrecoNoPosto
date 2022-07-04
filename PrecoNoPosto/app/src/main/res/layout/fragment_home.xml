@@ -158,6 +158,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/homeHasMechanicalTb" />
 
+        <TextView
+            android:id="@+id/homeNetworkErrorTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/network_error"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="@+id/homeGasStationMap"
+            app:layout_constraintBottom_toBottomOf="@+id/homeGasStationMap"
+            app:layout_constraintStart_toStartOf="@+id/homeGasStationMap"
+            app:layout_constraintEnd_toEndOf="@+id/homeGasStationMap" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/homeNetworkTryAgainTv"
+            style="@style/DarkOrangeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/space_48dp"
+            android:layout_marginStart="@dimen/space_8dp"
+            android:layout_marginTop="@dimen/space_24dp"
+            android:layout_marginEnd="@dimen/space_8dp"
+            android:text="@string/try_again"
+            app:layout_constraintTop_toBottomOf="@+id/homeNetworkErrorTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

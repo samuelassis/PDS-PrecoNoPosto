@@ -40,4 +40,14 @@
     <string name="chose_locale">Selecione a localização</string>
     <string name="evaluateTitle">Avalie o Posto</string>
     <string name="commentary">Comentário</string>
+    <string name="network_error">Erro de conexão.\nTente novamente</string>
+    <string name="try_again">Tentar novamente</string>
+    <string name="sign_up_error">Erro: Todos os campos são obrigatórios</string>
+    <string name="signup_required_field">Campo obrigatório</string>
+    <string name="signup_required_field_error_title">Erro - Campo vazio</string>
+    <string name="signup_required_field_error_description">Cadastro não realizado. Preencha todos os campos para realizar o cadastro</string>
+    <string name="menor_de_idade">Para concluir o cadastro, é exigido que o usuário tenha, no mínimo, 18 anos de idade</string>
+    <string name="inserir_campo_data_de_nascimento">Inserir data de nascimento no formato dia/mes/ano</string>
+    <string name="data_de_nascimento_invalida">Data de nascimento inválida</string>
+
 </resources>
