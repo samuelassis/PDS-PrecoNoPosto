@@ -17,3 +17,9 @@ buildscript {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+tasks.register("runUnityTests") { // 1
+    dependsOn(":app:lint", ":app:testDebugUnitTest")  // 2 ==> CUSTOMIZE THIS LINE
+    group = "custom"      // 3
+    description = "$ ./gradlew runUnityTests # runs on GitHub Action" //3
+}
