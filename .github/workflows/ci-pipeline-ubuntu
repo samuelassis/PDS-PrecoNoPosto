@@ -27,5 +27,3 @@ jobs:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
-        #trying to force wrapper version
-        run: gradle wrapper --gradle-version 2.5
